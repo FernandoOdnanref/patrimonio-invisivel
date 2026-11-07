@@ -13,16 +13,17 @@
   --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
   --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --action: #1D5E6A; --action-ink: #FFFFFF;
   --lvc: var(--accent);
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --paper: #0F1517; --paper-2: #151D20; --ink: #E3E8E2; --muted: #95A2A5; --line: #2B373A; --screen: #131B1E;
   --accent: #7CC4A7; --accent-ink: #0F1517; --good: #6DCB93; --bad: #F08B74; --warn: #E5B95A;
-  --lv1: #86B6D6; --lv2: #B7A0E3; --lv3: #EB8F84; --lv4: #E2C15F; --lv5: #F0A070; --lv6: #70C6CF; --lv7: #CDAE92; color-scheme: dark } }
+  --lv1: #86B6D6; --lv2: #B7A0E3; --lv3: #EB8F84; --lv4: #E2C15F; --lv5: #F0A070; --lv6: #70C6CF; --lv7: #CDAE92; --action: #7FCAD4; --action-ink: #0F1517; color-scheme: dark } }
 :root[data-theme="dark"] {
   --paper: #0F1517; --paper-2: #151D20; --ink: #E3E8E2; --muted: #95A2A5; --line: #2B373A; --screen: #131B1E;
   --accent: #7CC4A7; --accent-ink: #0F1517; --good: #6DCB93; --bad: #F08B74; --warn: #E5B95A;
-  --lv1: #86B6D6; --lv2: #B7A0E3; --lv3: #EB8F84; --lv4: #E2C15F; --lv5: #F0A070; --lv6: #70C6CF; --lv7: #CDAE92; color-scheme: dark }
+  --lv1: #86B6D6; --lv2: #B7A0E3; --lv3: #EB8F84; --lv4: #E2C15F; --lv5: #F0A070; --lv6: #70C6CF; --lv7: #CDAE92; --action: #7FCAD4; --action-ink: #0F1517; color-scheme: dark }
 
 body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 17px; line-height: 1.6; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
@@ -44,7 +45,7 @@ h4 { font-size: 1rem; margin: 0 0 .3rem; }
 .nav a { white-space: nowrap; flex: none; }
 .nav a, .btn, button.btn { font-family: var(--f-body); font-size: .9rem; font-weight: 700; text-decoration: none; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
 .nav a:hover, .btn:hover { border-color: var(--ink); }
-.btn.primary { background: var(--lvc); color: var(--accent-ink); border-color: var(--lvc); }
+.btn.primary { background: var(--action); color: var(--action-ink); border-color: var(--action); }
 .btn.primary:hover { filter: brightness(1.08); }
 .btn[disabled] { opacity: .5; cursor: not-allowed; }
 .badge { font-family: var(--f-mono); font-size: .72rem; background: var(--bad); color: var(--paper); border-radius: 999px; padding: 0 6px; min-width: 18px; text-align: center; }
@@ -186,7 +187,7 @@ canvas.sim { width: 100%; aspect-ratio: 2 / 1; display: block; background: var(-
 .q label.wrong { border-color: var(--bad); background: color-mix(in srgb, var(--bad) 10%, transparent); }
 .q .exp { font-size: .9rem; color: var(--muted); margin-top: 6px; }
 .score { border-radius: 14px; padding: 16px 18px; margin-top: 16px; border: 1.5px solid var(--line); }
-.score.pass { border-color: var(--good); } .score.fail { border-color: var(--bad); }
+.score.pass { border-color: var(--good); } .score.fail { border-color: var(--warn); background: color-mix(in srgb, var(--warn) 7%, transparent); }
 .lockmsg { border: 1.5px dashed var(--line); border-radius: 14px; padding: 24px; text-align: center; margin-top: 30px; }
 
 /* Panels */
@@ -229,6 +230,36 @@ canvas.sim { width: 100%; aspect-ratio: 2 / 1; display: block; background: var(-
   .toc { top: env(safe-area-inset-top, 0px); }
 }
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+/* Inscrição, relógio e celebração */
+.greet { font-size: 1.02rem; border-left: 3px solid var(--good); padding: 6px 12px; margin: 12px 0; background: color-mix(in srgb, var(--good) 8%, transparent); border-radius: 0 8px 8px 0; max-width: 40em; }
+.fs { border: 0; padding: 0; margin: 18px 0 0; }
+.fs legend { padding: 0; font-weight: 700; font-size: 1rem; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin-top: 6px; }
+.chips label { border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; font-weight: 700; font-size: .92rem; min-height: 36px; display: inline-flex; align-items: center; }
+.chips label input { position: absolute; opacity: 0; pointer-events: none; }
+.chips label:has(input:checked) { background: var(--action); border-color: var(--action); color: var(--action-ink); }
+.chips label:has(input:focus-visible) { outline: 3px solid var(--action); outline-offset: 2px; }
+.formerr { color: var(--bad); font-weight: 700; }
+.building { display: flex; gap: 14px; align-items: center; padding: 30px 0; font-size: 1.1rem; }
+.spin { width: 28px; height: 28px; border-radius: 50%; border: 3px solid var(--line); border-top-color: var(--action); animation: sp 1s linear infinite; }
+@keyframes sp { to { transform: rotate(360deg); } }
+.pbar { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; margin: 6px 0 4px; }
+.pbar i { display: block; height: 100%; background: var(--lvc); border-radius: 5px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.tmr { position: fixed; z-index: 20; right: max(14px, env(safe-area-inset-right, 0px)); bottom: max(14px, env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.tmr-pill { display: flex; align-items: center; gap: 8px; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px 6px 6px; cursor: pointer; font-family: var(--f-mono); font-weight: 600; font-size: .95rem; box-shadow: 0 4px 16px rgba(0,0,0,.12); min-height: 46px; }
+.tmr.run .tmr-pill { border-color: var(--action); }
+.tmr-p { order: -1; width: min(330px, calc(100vw - 28px)); background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.16); }
+.tmr-big { font-size: 1.05rem; font-weight: 600; margin: 6px 0 4px; }
+.tmr-arc { transition: stroke-dashoffset .4s ease; }
+.cel { position: fixed; z-index: 45; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 76px); transform: translateX(-50%); width: min(480px, calc(100vw - 32px)); transition: opacity .6s; }
+.cel.fade { opacity: 0; }
+.cel-card { display: flex; gap: 14px; align-items: flex-start; background: var(--paper); border: 2px solid var(--good); border-radius: 16px; padding: 16px 18px; box-shadow: 0 10px 34px rgba(0,0,0,.2); }
+.cel-card p { margin: 4px 0 0; }
+.cel-ok { flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--good); color: var(--paper); display: grid; place-items: center; font-weight: 700; font-size: 1.2rem; }
+canvas.confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 44; }
+@media (prefers-reduced-motion: reduce) { .spin { animation: none; } .tmr-arc, .cel { transition: none; } }
 
 body{margin:0} img{max-width:100%}
 </style></head><body>
@@ -1249,20 +1280,20 @@ COURSE.marco = [
   function home() {
     const nx = nextLevel(); const totalPass = L.filter(l => passed(l.id)).length; const days = Object.keys(S.daily).length;
     const notes = L.map(l => {
-      const lock = !unlocked(l.id), ps = passed(l.id);
-      return `<a class="note ${l.cor} ${lock ? 'locked' : ''} ${ps ? 'passed' : ''}" href="${lock ? '#' : '#' + l.slug}" ${lock ? 'aria-disabled="true" data-locked="1"' : ''}>
+      const paid = lockedPaid(l.id), lock = !paid && !unlocked(l.id), ps = passed(l.id);
+      return `<a class="note ${l.cor} ${lock || paid ? 'locked' : ''} ${ps ? 'passed' : ''}" href="${paid ? '#completo' : lock ? '#' : '#' + l.slug}" ${lock ? 'aria-disabled="true" data-locked="1"' : ''}>
         <canvas data-guil="${l.id}" data-seed="${l.id * 3}" data-rings="18" aria-hidden="true"></canvas>
         <span class="val">${l.nota}</span><span class="eyebrow">Nível ${l.id} · ${l.semana}</span><h3>${esc(l.titulo)}</h3>
-        <span class="meta"><span>${lock ? 'bloqueado' : ps ? 'nota ' + S.quiz[l.id].best + '/' + l.prova.length : exDone(l) + '/' + l.exercicios.length + ' exercícios'}</span><span>${lock ? '' : '→'}</span></span></a>`;
+        <span class="meta"><span>${paid ? 'versão completa' : lock ? 'bloqueado' : ps ? 'nota ' + S.quiz[l.id].best + '/' + l.prova.length : exDone(l) + '/' + l.exercicios.length + ' exercícios'}</span><span>${lock ? '' : '→'}</span></span></a>`;
     }).join('');
     return shell(`<div class="wrap">
       <section class="hero">
-        <div><span class="eyebrow">Curso de transformação financeira · 7 níveis · 8 semanas</span>
+        <div>${greeting()}<span class="eyebrow">Curso de transformação financeira · 7 níveis · 8 semanas · Níveis 1 a 4 gratuitos</span>
           <h1>Riqueza é o que você <em>não vê</em>.</h1>
           <p class="lead">Um curso para mudar o que acontece no automático quando o dinheiro aparece: sair do aperto, desmontar crenças, decidir sem medo, ganhar mais sem trabalhar mais e acumular patrimônio com saúde. Cada afirmação tem fonte; cada nível termina numa prova.</p>
-          <div class="cta-row">${!S.marco0 ? '<a class="btn primary" href="#marco-zero">Começar pelo Marco Zero</a>' : nx ? `<a class="btn primary" href="#${nx.slug}">Continuar: Nível ${nx.id}</a>` : '<a class="btn primary" href="#constituicao">Ver minha Constituição Financeira</a>'}
+          <div class="cta-row">${!S.insc ? '<a class="btn primary" href="#inscricao">Começar grátis: inscrição de 3 minutos</a>' : !S.marco0 ? '<a class="btn primary" href="#marco-zero">Próximo passo: Marco Zero</a>' : nx ? `<a class="btn primary" href="#${nx.slug}">Continuar: Nível ${nx.id}</a>` : '<a class="btn primary" href="#constituicao">Ver minha Constituição Financeira</a>'}
             <a class="btn" href="#biblioteca">Ver as ${countSrc()} fontes</a></div>
-          <div class="statline"><span><b>${totalPass}/7</b>níveis aprovados</span><span><b>${days}</b>dias de ritual</span><span><b>${Object.keys(S.srs).length}</b>cartões na memória</span></div>
+          <div class="statline"><span><b>${totalPass}/7</b>níveis aprovados</span><span><b>${studyDays()}</b>dias de estudo</span><span><b>${days}</b>dias de ritual</span><span><b>${Object.keys(S.srs).length}</b>cartões na memória</span></div>
         </div>
         <div class="hero-art"><canvas data-guil="a" data-seed="11" data-rings="40" aria-hidden="true"></canvas><div class="seal"><div><span>patrimônio líquido</span><b>${S.ex.n1_networth && S.ex.n1_networth._res != null ? brl(S.ex.n1_networth._res) : 'R$ ?'}</b><span>${S.ex.n1_networth && S.ex.n1_networth._res != null ? 'seu número de hoje' : 'descubra no Nível 1'}</span></div></div></div>
       </section>
@@ -1307,14 +1338,14 @@ COURSE.marco = [
     const exs = lv.exercicios.map(e => `<div class="ex" id="ex-${e.id}" data-ex="${e.id}"></div>`).join('');
     const nx = L[lv.id];
     return shell(`<section class="lvhead ${lv.cor}"><canvas data-guil="${lv.id}" data-seed="${lv.id * 5}" data-rings="34" aria-hidden="true"></canvas><div class="col">
-        <span class="eyebrow">Nível ${lv.id} · ${lv.semana} · cédula de ${lv.nota}</span><h1>${esc(lv.titulo)}</h1><p class="tese">${esc(lv.tese)}</p>
+        <span class="eyebrow">Nível ${lv.id} · ${lv.semana} · cédula de ${lv.nota}</span><h1>${esc(lv.titulo)}</h1><p class="tese">${esc(lv.tese)}</p>${greeting()}
         <ul class="skills">${lv.habilidades.map(h => `<li>${esc(h)}</li>`).join('')}</ul></div></section>
       <nav class="toc ${lv.cor}" aria-label="Seções do nível"><a href="#${lv.slug}" data-go="missao">Missão</a><a href="#${lv.slug}" data-go="video">Vídeo</a><a href="#${lv.slug}" data-go="aulas">Aulas</a><a href="#${lv.slug}" data-go="exercicios">Exercícios</a><a href="#${lv.slug}" data-go="pratica">Prática</a><a href="#${lv.slug}" data-go="prova">Prova</a><a href="#${lv.slug}" data-go="fontes">Fontes</a></nav>
       <div class="col ${lv.cor}">
         <section class="block" id="missao"><h2>Missão <small>${lv.semana.toUpperCase()}</small></h2><div class="mission">${esc(lv.missao)}</div></section>
         <section class="block" id="video"><h2>Vídeo${vids.length > 1 ? 's' : ''} <small>ANIMAÇÃO NARRADA</small></h2><div class="vids">${vids.map(v => `<div data-video="${v}"></div>`).join('')}</div><p class="small">A narração usa a voz do seu navegador. Desligue em "Narração" para assistir só com legenda.</p></section>
         <section class="block" id="aulas"><h2>Aulas <small>${lv.aulas.length} AULAS</small></h2>${lessons}</section>
-        <section class="block" id="exercicios"><h2>Exercícios <small>${exDone(lv)}/${lv.exercicios.length} FEITOS</small></h2><p class="small">Suas respostas ficam salvas automaticamente. Ninguém além de você as vê.</p>${exs}</section>
+        <section class="block" id="exercicios"><h2>Exercícios <small>${exDone(lv)}/${lv.exercicios.length} FEITOS</small></h2>${(() => { const f = lv.exercicios.length - exDone(lv); return f > 0 && f <= 2 && exDone(lv) > 0 ? `<p class="greet">Faltam só ${f} exercício(s) para concluir este nível. Depois, só a prova.</p>` : ''; })()}<div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="${lv.exercicios.length}" aria-valuenow="${exDone(lv)}" aria-valuetext="${exDone(lv)} de ${lv.exercicios.length} exercícios"><i style="width:${100 * exDone(lv) / lv.exercicios.length}%"></i></div><p class="small">Suas respostas ficam salvas automaticamente. Ninguém além de você as vê.</p>${exs}</section>
         <section class="block" id="pratica"><h2>Prática da semana</h2><div class="callout">${esc(lv.pratica)}</div><button class="btn" type="button" data-act="ritual">Abrir o ritual de hoje</button></section>
         <section class="block" id="prova"><h2>Prova do nível <small>MÍNIMO ${passMin(lv.prova)}/${lv.prova.length}</small></h2><div id="quiz"></div>
           ${passed(lv.id) && nx ? `<div class="cta-row"><a class="btn primary" href="#${nx.slug}">Ir para o Nível ${nx.id}: ${esc(nx.titulo)}</a></div>` : ''}
@@ -1329,6 +1360,7 @@ COURSE.marco = [
     $$('[data-go]').forEach(a => a.onclick = e => { e.preventDefault(); const t = document.getElementById(a.dataset.go); if (t) t.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }); });
     renderQuiz($('#quiz'), lv.prova, r => {
       const prev = S.quiz[lv.id] || { best: 0 }; const ok = r.score >= passMin(lv.prova);
+      if (ok && !prev.passed) setTimeout(() => celebrate(lv.id === CFG.nivelGratis && !isFull() ? 'fim' : 'nivel', { nivel: lv.id }), 400);
       S.quiz[lv.id] = { best: Math.max(prev.best || 0, r.score), passed: prev.passed || ok, at: today() };
       if (ok) lv.cards.forEach((c, i) => { const id = lv.id + '-' + i; if (!S.srs[id]) S.srs[id] = { box: 0, due: addDays(today(), 1) }; });
       save(); return ok;
@@ -1352,7 +1384,7 @@ COURSE.marco = [
         const ex = $('.exp', fs); ex.hidden = false; ex.innerHTML = (v === q.a ? '<b class="ok">Certo.</b> ' : '<b class="bad">Errado.</b> ') + cites(q.e); });
       const ok = onScore({ score }); const min = passMin(qs);
       $('#qsend', el).hidden = true;
-      $('#qres', el).innerHTML = `<div class="score ${ok ? 'pass' : 'fail'}"><div class="big-out">${score}/${qs.length}</div><p>${ok ? 'Aprovado. Os cartões de revisão deste nível entraram na sua memória e voltam amanhã.' : `Faltou pouco: o mínimo é ${min}. Releia as explicações acima e as aulas citadas, e tente de novo.`}</p><div class="cta-row">${ok ? '<button class="btn primary" type="button" id="qnext">Continuar</button>' : '<button class="btn" type="button" id="qretry">Refazer a prova</button>'}</div></div>`;
+      $('#qres', el).innerHTML = `<div class="score ${ok ? 'pass' : 'fail'}"><div class="big-out">${ok ? '✓ ' : ''}${score}/${qs.length}</div><p>${ok ? 'Aprovado. Os cartões de revisão deste nível entraram na sua memória e voltam amanhã.' : `Você acertou ${score} de ${qs.length}. ${esc(fr('reprova'))} Faltaram ${min - score} acerto(s). As explicações acima mostram o que revisar.`}</p><div class="cta-row">${ok ? '<button class="btn primary" type="button" id="qnext">Continuar</button>' : '<button class="btn" type="button" id="qretry">Refazer a prova</button>'}</div></div>`;
       const nb = $('#qnext', el); if (nb) nb.onclick = onPass; const rb = $('#qretry', el); if (rb) rb.onclick = () => renderQuiz(el, qs, onScore, onPass);
     };
   }
@@ -1675,12 +1707,224 @@ COURSE.marco = [
       const url = URL.createObjectURL(new Blob([data], { type: 'text/markdown' })); const a = document.createElement('a'); a.href = url; a.download = 'constituicao-financeira.md'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000); };
   }
 
+  /* ---------- Configuração da oferta ---------- */
+  const CFG = {
+    pixChave: '',          // chave Pix para contribuições (preencher)
+    linkCompleto: '',      // link de compra da versão completa (preencher)
+    codigos: ['PATRIMONIO2027'], // códigos de liberação da versão completa (provisório até existir login)
+    nivelGratis: 4,
+  };
+  const isFull = () => !!S.full;
+  const lockedPaid = id => id > CFG.nivelGratis && !isFull();
+
+  /* ---------- Frases (biblioteca com rodízio) ---------- */
+  const FR = {
+    boas: ['Que bom ter você aqui, {nome}. Você já deu o passo mais difícil: decidir olhar para isso.', 'Aqui ninguém julga. Dívida é uma situação, não quem você é.', 'Você não precisa saber nada de finanças. A gente começa do zero, um passo por vez.', 'Muita gente chega aqui cansada. Tudo bem. O curso foi feito para caber no seu dia.'],
+    inicio: ['Bem-vindo de volta. Hoje são {min} minutos. Vamos?', 'Respire. Pegue um papel e uma caneta. Começamos quando você quiser.', 'Hoje você vai aprender uma coisa que já pode usar amanhã.', 'Lembra por que você começou? Hoje é mais um passo nessa direção.', 'Sem pressa. O importante é fazer, não fazer rápido.'],
+    durante: ['Você está indo bem. Continue no seu ritmo.', 'Se travar, tudo bem. Releia com calma e siga.', 'Cada minuto aqui é um minuto cuidando do seu futuro.', 'Distraiu? Normal. Volte para a última frase que leu.'],
+    metade: ['Metade do tempo já foi. O resto é mais curto do que parece.'],
+    quase: ['Quase lá. Mais {x} minutos e o dia de hoje está feito.', 'Faltam só {x} minutos para a meta de hoje.'],
+    feito: ['Feito. Você cumpriu sua meta de hoje.', 'Mais um dia cumprido. Isso é constância, e constância muda vidas.', 'Você apareceu e fez. É assim que se sai das dívidas: um dia de cada vez.', 'Tarefa concluída. Você ficou até o fim, mesmo cansado. Isso conta muito.', '{n} dias de estudo no total. Cada um deles foi escolha sua.', 'Pronto. Você está mais perto do fim do Nível {nivel} do que ontem.', 'Seu esforço de hoje foi registrado. Pode se orgulhar dele.', 'Meta batida. Seu próximo passo já está esperando por amanhã.', 'Você fez a parte difícil: começou. E ainda terminou.', 'Mais uma peça no lugar. Seu plano está ganhando forma.', 'Concluído. Sua barra de progresso andou mais um pouco.', 'Você dedicou {min} minutos a você hoje. Isso é cuidado.', 'Feito por hoje. Descanse: amanhã tem mais um passo pequeno.'],
+    nivel: ['Nível {nivel} concluído. Você chegou ao fim de uma etapa inteira.', 'Você terminou o Nível {nivel}. Olhe o que você já sabe fazer agora.', 'Etapa vencida. Isso foi fruto do seu esforço, dia após dia.', 'Você provou para você mesmo que consegue terminar o que começa.', 'O que você aprendeu aqui ninguém tira de você.'],
+    reprova: ['Ainda não foi desta vez. Errar faz parte de aprender, com qualquer pessoa.', 'Não é falta de capacidade. É só um assunto que pede mais uma revisão.', 'A prova mostra onde focar, não quem você é.', 'Respire. Você não perdeu nada do que já fez. Seu progresso continua salvo.', 'Seja gentil com você agora. Quando quiser, tente de novo, sem limite de tentativas.'],
+    volta1: ['Ontem não deu. Acontece. Hoje é um ótimo dia para continuar.', 'Um dia de pausa não apaga nada. Seu progresso está todo aqui.', 'Que bom que você voltou. Vamos com a tarefa de hoje?', 'Pular um dia é normal. O que importa é voltar, e você voltou.'],
+    volta3: ['Que bom te ver de novo, {nome}. Sem cobrança: tudo o que você fez está guardado.', 'A vida aperta às vezes. Quando quiser, a gente recomeça com 5 minutos.', 'Hoje é um bom dia para recomeçar. Sua próxima tarefa é curta.', 'Você voltou. Isso é o que mais importa.', 'Ninguém sai das dívidas em linha reta. Voltar faz parte do caminho.'],
+    m7: ['7 dias de estudo. Você está criando um hábito de verdade.', 'Uma semana de dias cuidando do seu dinheiro. Isso é raro e é seu.', '7 dias. Você mostrou que consegue manter um compromisso com você.'],
+    m30: ['30 dias de estudo. Você é alguém que cuida do próprio dinheiro.', 'Um mês de estudo. Olhe para trás: você sabe coisas que não sabia no dia 1.', '30 dias de constância. O hábito está ficando mais forte a cada dia.'],
+    fim: ['Você concluiu o Nível 4. Agora você tem um plano para sair das dívidas.', 'Você foi até o fim da parte gratuita. Isso pede coragem e constância.', 'O que você aprendeu é seu para sempre, continuando ou não.', 'Seu plano está pronto. O mais importante agora é seguir com ele, um mês por vez.'],
+  };
+  function fr(group, vars) {
+    const arr = FR[group] || ['']; S.fr = S.fr || {}; const used = S.fr[group] || [];
+    let pool = arr.map((t, i) => i).filter(i => !used.includes(i)); if (!pool.length) { pool = arr.map((t, i) => i); S.fr[group] = []; }
+    const i = pool[Math.floor(Math.random() * pool.length)]; S.fr[group] = (S.fr[group] || []).concat(i).slice(-Math.max(1, arr.length - 1));
+    return arr[i].replace(/\{(\w+)\}/g, (m, k) => vars && vars[k] != null ? vars[k] : (k === 'nome' ? ((S.insc || {}).nome || '') : m)).replace(/\s+,/g, ',').replace(', .', '.');
+  }
+  function lastStudyGap() { const ds = Object.keys(S.study || {}).filter(d => S.study[d].ok || S.study[d].s > 60).sort(); if (!ds.length) return null; const last = ds[ds.length - 1]; if (last === today()) return 0; return Math.round((new Date(today() + 'T12:00:00') - new Date(last + 'T12:00:00')) / 864e5); }
+  function studyDays() { return Object.values(S.study || {}).filter(x => x.ok).length; }
+  function greeting() {
+    if (!S.insc) return '';
+    const gap = lastStudyGap(), min = metaMin();
+    let t;
+    if (gap === null) t = fr('boas'); else if (gap === 0) t = fr('inicio', { min }); else if (gap === 1) t = fr('volta1'); else t = fr('volta3');
+    return `<p class="greet" role="status">${esc(t)}</p>`;
+  }
+
+  /* ---------- Inscrição ---------- */
+  const RENDAS = ['Prefiro não informar', 'Até R$ 2.000', 'R$ 2.001 a R$ 5.000', 'R$ 5.001 a R$ 10.000', 'Acima de R$ 10.000'];
+  const CONTRIB = [0, 5, 10, 20, 50];
+  function inscricao() {
+    const d = S.inscDraft || { min: 10, contrib: 10, dias: { 1: true, 2: true, 3: true, 4: true, 5: true } };
+    const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    return shell(`<div class="col" style="padding-top:32px"><span class="eyebrow">Inscrição gratuita · Níveis 1 a 4</span><h1 style="font-size:2.5rem">Antes de começar, conte um pouco de você</h1>
+      <p>São poucas perguntas. Elas montam o seu plano de estudo e ninguém além de você vê as respostas. A resposta é imediata.</p>
+      <form id="insc" class="ex" novalidate>
+        <label class="f" for="in-nome">Como podemos te chamar?</label><input type="text" id="in-nome" autocomplete="given-name" value="${esc(d.nome || '')}" required>
+        <label class="f" for="in-quer">O que você quer que seja diferente na sua vida financeira daqui a 8 semanas?</label><textarea id="in-quer" required placeholder="Ex.: parar de usar o cheque especial e saber exatamente quanto devo">${esc(d.quer || '')}</textarea>
+        <label class="f" for="in-tentou">O que você já tentou e não funcionou? <span class="small">(opcional)</span></label><textarea id="in-tentou">${esc(d.tentou || '')}</textarea>
+        <fieldset class="fs"><legend class="f">Quantos minutos por dia você quer estudar?</legend><p class="small">Comece pequeno. Metas pequenas viram hábito mais rápido. Você pode mudar quando quiser.</p>
+          <div class="chips">${[5, 10, 15, 20, 30].map(m => `<label><input type="radio" name="in-min" value="${m}" ${+d.min === m ? 'checked' : ''}><span>${m} min</span></label>`).join('')}<label><input type="radio" name="in-min" value="x" ${[5, 10, 15, 20, 30].includes(+d.min) ? '' : 'checked'}><span>Outro</span></label><input type="number" id="in-minx" min="3" max="60" value="${[5, 10, 15, 20, 30].includes(+d.min) ? '' : esc(d.min)}" aria-label="Outro valor em minutos" style="width:90px"></div></fieldset>
+        <fieldset class="fs"><legend class="f">Em que dias e horário você vai reservar esse tempo?</legend>
+          <div class="chips">${dias.map((n, i) => `<label><input type="checkbox" name="in-dia" value="${i}" ${d.dias && d.dias[i] ? 'checked' : ''}><span>${n}</span></label>`).join('')}</div>
+          <label class="f" for="in-hora">Horário</label><input type="time" id="in-hora" value="${esc(d.hora || '21:00')}" style="max-width:160px"></fieldset>
+        <fieldset class="fs"><legend class="f">Para indicar o melhor caminho para você <span class="small">(opcional)</span></legend>
+          <label class="f" for="in-renda">Renda mensal da casa</label><select id="in-renda">${RENDAS.map(r => `<option ${d.renda === r ? 'selected' : ''}>${r}</option>`).join('')}</select>
+          <label class="check"><input type="checkbox" id="in-atraso" ${d.atraso ? 'checked' : ''}><span>Tenho alguma conta ou dívida em atraso</span></label>
+          <p class="small">Usamos isso só para sugerir o caminho e o preço social da parte completa. Nunca para negar acesso.</p></fieldset>
+        <fieldset class="fs"><legend class="f">Seu compromisso</legend>
+          <label class="check"><input type="checkbox" id="in-comp" ${d.comp ? 'checked' : ''} required><span id="in-comptxt"></span></label></fieldset>
+        <fieldset class="fs"><legend class="f">Quanto você pode contribuir hoje?</legend>
+          <p class="small">Todo valor ajuda a manter bolsas para outras pessoas. Se hoje não dá, tudo bem: seu investimento agora é o seu tempo.</p>
+          <div class="chips">${CONTRIB.map(v => `<label><input type="radio" name="in-ct" value="${v}" ${+d.contrib === v ? 'checked' : ''}><span>${v === 0 ? 'R$ 0 · não posso agora' : 'R$ ' + v}</span></label>`).join('')}<label><input type="radio" name="in-ct" value="x" ${CONTRIB.includes(+d.contrib) ? '' : 'checked'}><span>Outro</span></label><input type="number" id="in-ctx" min="1" value="${CONTRIB.includes(+d.contrib) ? '' : esc(d.contrib)}" aria-label="Outro valor em reais" style="width:110px"></div></fieldset>
+        <p class="small">Suas respostas ficam guardadas para montar seu plano e você pode apagá-las quando quiser. O curso é educativo: não é recomendação de investimento nem serviço jurídico.</p>
+        <p class="formerr" id="in-err" role="alert" hidden></p>
+        <div class="cta-row"><button class="btn primary" type="submit">Montar meu plano</button></div>
+      </form></div>`);
+  }
+  function bindInsc() {
+    const f = $('#insc'), get = () => { const mr = $('input[name=in-min]:checked', f), cr = $('input[name=in-ct]:checked', f); const dias = {}; $$('input[name=in-dia]', f).forEach(c => { if (c.checked) dias[c.value] = true; });
+      return { nome: $('#in-nome').value.trim().slice(0, 60), quer: $('#in-quer').value.slice(0, 1500), tentou: $('#in-tentou').value.slice(0, 1500), min: mr ? (mr.value === 'x' ? Math.max(3, Math.min(60, +$('#in-minx').value || 10)) : +mr.value) : 10, dias, hora: $('#in-hora').value, renda: $('#in-renda').value, atraso: $('#in-atraso').checked, comp: $('#in-comp').checked, contrib: cr ? (cr.value === 'x' ? Math.max(0, +$('#in-ctx').value || 0) : +cr.value) : 0 }; };
+    const nomes = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const upd = () => { if (!document.getElementById('in-nome')) return; const d = get(); const ds = Object.keys(d.dias).map(Number).sort(); const dtxt = ds.length === 7 ? 'todos os dias' : ds.length ? ds.map(i => nomes[i]).join(', ') : 'nos dias que escolhi';
+      $('#in-comptxt').textContent = `Eu me comprometo a estudar ${d.min} minutos ${ds.length === 7 ? '' : 'por dia, '}${dtxt}, às ${d.hora || 'um horário fixo'}, e a fazer 1 nível por semana até o Nível 4.`; S.inscDraft = d; };
+    f.addEventListener('input', debounce(() => { upd(); try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) { } }, 250)); f.addEventListener('change', upd); f.addEventListener('input', () => { $('#in-err').hidden = true; }); upd();
+    f.onsubmit = ev => { ev.preventDefault(); const d = get(); const err = $('#in-err');
+      const miss = !d.nome ? 'Diga como podemos te chamar.' : d.quer.trim().length < 8 ? 'Conte em uma ou duas frases o que você quer mudar.' : !Object.keys(d.dias).length ? 'Escolha pelo menos um dia da semana.' : !d.comp ? 'Marque o compromisso para continuar. Ele é a primeira tarefa do curso.' : '';
+      if (miss) { err.hidden = false; err.textContent = miss; return; }
+      S.insc = Object.assign(d, { em: today() }); S.meta = d.min; delete S.inscDraft; save(); planReveal(); };
+  }
+  function planReveal() {
+    const d = S.insc, box = $('#insc'); box.innerHTML = `<div class="building" role="status"><div class="spin" aria-hidden="true"></div><p id="bld">Lendo suas respostas…</p></div>`;
+    const steps = ['Lendo suas respostas…', 'Ajustando o ritmo para ' + d.min + ' minutos por dia…', 'Organizando os Níveis 1 a 4 em 4 semanas…', 'Seu plano está pronto.'];
+    const rm = matchMedia('(prefers-reduced-motion: reduce)').matches; let k = 0;
+    const tick = () => { k++; if (k < steps.length) { $('#bld').textContent = steps[k]; setTimeout(tick, rm ? 300 : 900); } else showPlan(); };
+    setTimeout(tick, rm ? 300 : 900);
+  }
+  function showPlan() {
+    const d = S.insc, box = $('#insc'); const pix = d.contrib > 0;
+    const sem = [['Semana 1', 'Nível 1 · Encarar os números'], ['Semanas 2 e 3', 'Nível 2 · Estancar e sair do aperto'], ['Semana 4', 'Nível 3 · Reescrever as crenças'], ['Semana 5', 'Nível 4 · Piloto automático']];
+    box.innerHTML = `<span class="eyebrow">Inscrição confirmada</span><h2 style="margin-top:6px">${esc(d.nome)}, seu plano está pronto</h2>
+      <p>${esc(fr('boas'))}</p>
+      <div class="kv"><div><span>Meta diária</span><b>${d.min} min</b></div><div><span>Horário</span><b>${esc(d.hora || '—')}</b></div><div><span>Parte gratuita</span><b>Níveis 1 a 4</b></div></div>
+      <ol class="steps" style="margin-top:14px">${sem.map(s => `<li><b>${s[0]}:</b> ${s[1]}</li>`).join('')}</ol>
+      <div class="callout"><b>Seu objetivo:</b> ${esc(d.quer)}</div>
+      ${pix ? `<div class="callout"><b>Contribuição de R$ ${d.contrib}.</b> ${CFG.pixChave ? `Chave Pix: <span class="mono" id="pixk">${esc(CFG.pixChave)}</span> <button class="btn" type="button" id="pixc">Copiar</button>` : 'As instruções de contribuição chegam em breve.'} Seu acesso já está liberado, com ou sem contribuição.</div>` : '<p class="small">Sem contribuição hoje. Seu acesso está liberado do mesmo jeito.</p>'}
+      <div class="cta-row"><a class="btn primary" href="#marco-zero">Próximo passo: Marco Zero (2 min)</a></div>`;
+    const pc = $('#pixc'); if (pc) pc.onclick = () => { navigator.clipboard.writeText(CFG.pixChave).then(() => pc.textContent = 'Copiado', () => { const r = document.createRange(); r.selectNodeContents($('#pixk')); getSelection().removeAllRanges(); getSelection().addRange(r); }); };
+    box.scrollIntoView({ block: 'start' }); timerMount();
+  }
+
+  /* ---------- Parte completa ---------- */
+  function completo(lv) {
+    const done4 = passed(CFG.nivelGratis);
+    return shell(`<div class="col" style="padding-top:36px"><span class="eyebrow">Versão completa · Níveis 5 a 7</span>
+      <h1 style="font-size:2.4rem">${done4 ? esc(fr('fim')) : 'Construir patrimônio'}</h1>
+      ${done4 ? `<p>${esc(fr('fim'))}</p>` : `<p>A parte gratuita vai até o Nível ${CFG.nivelGratis}. Termine o plano de saída das dívidas primeiro: é o degrau que sustenta os próximos.</p>`}
+      <div class="ex"><h3>O que vem nos Níveis 5 a 7</h3>
+        <ul><li><b>Nível 5:</b> como o milionário de verdade pensa, o seu "suficiente" e a lista do que você nunca fará.</li><li><b>Nível 6:</b> decidir e investir sem medo, com a escada de segurança, o teste da ruína e o detector de golpe.</li><li><b>Nível 7:</b> ganhar mais sem trabalhar mais horas, o seu número da liberdade e a Constituição Financeira.</li></ul>
+        <p class="small">Se quiser ir além, os próximos níveis tratam de construir patrimônio. Sem pressa: seu plano gratuito continua salvo aqui.</p>
+        <div class="cta-row">${CFG.linkCompleto ? `<a class="btn primary" href="${esc(CFG.linkCompleto)}" target="_blank" rel="noopener">Conhecer a versão completa</a>` : `<button class="btn primary" type="button" id="cp-int">${S.interesse ? 'Você está na lista' : 'Quero ser avisado quando abrir'}</button>`}</div>
+        <details style="margin-top:12px"><summary class="small">Já tenho a versão completa</summary><label class="f" for="cp-cod">Código de acesso</label><input type="text" id="cp-cod" autocomplete="off"><div class="cta-row"><button class="btn" type="button" id="cp-ok">Liberar</button></div><p class="formerr" id="cp-err" role="alert" hidden></p></details>
+      </div><div class="cta-row"><a class="btn" href="#nivel-${Math.min(CFG.nivelGratis, (nextLevel() || { id: 4 }).id)}">Voltar ao meu plano</a></div></div>`);
+  }
+  function bindCompleto() {
+    const i = $('#cp-int'); if (i) i.onclick = () => { S.interesse = today(); save(); i.textContent = 'Você está na lista'; };
+    $('#cp-ok').onclick = () => { const v = $('#cp-cod').value.trim().toUpperCase(); if (CFG.codigos.includes(v)) { S.full = true; save(); location.hash = 'nivel-5'; render(); } else { const e = $('#cp-err'); e.hidden = false; e.textContent = 'Código não reconhecido. Confira as letras e tente de novo.'; } };
+  }
+
+  /* ---------- Relógio de estudo ---------- */
+  const metaMin = () => +(S.meta || (S.insc || {}).min || 10);
+  let tRun = false, tLast = 0, tIdle = Date.now(), tUi = null, tNote = '';
+  function sd() { S.study = S.study || {}; return S.study[today()] || (S.study[today()] = { s: 0, ok: false }); }
+  function fmtMin(s) { return Math.floor(s / 60); }
+  function timerMount() {
+    if (!S.insc) { if (tUi) { tUi.remove(); tUi = null; } return; }
+    if (tUi) { tDraw(); return; }
+    tUi = document.createElement('div'); tUi.className = 'tmr'; tUi.innerHTML = `<button class="tmr-pill" type="button" aria-expanded="false" aria-controls="tmr-p"><svg viewBox="0 0 36 36" width="34" height="34" aria-hidden="true"><circle cx="18" cy="18" r="15" fill="none" stroke="var(--line)" stroke-width="4"/><circle class="tmr-arc" cx="18" cy="18" r="15" fill="none" stroke="var(--lv-cur, var(--accent))" stroke-width="4" stroke-linecap="round" stroke-dasharray="94.25" stroke-dashoffset="94.25" transform="rotate(-90 18 18)"/></svg><span class="tmr-txt" role="timer" aria-live="off"></span></button>
+      <div class="tmr-p" id="tmr-p" hidden><div class="tmr-msg small"></div><div class="tmr-big mono" role="progressbar" aria-valuemin="0"></div>
+        <div class="cta-row"><button class="btn primary" type="button" data-t="go"></button><button class="btn" type="button" data-t="adj">Ajustar</button></div>
+        <div class="tmr-adj" hidden><p class="small">Ajustar o tempo de hoje</p><div class="cta-row"><button class="btn" type="button" data-t="m1">− 1 min</button><button class="btn" type="button" data-t="p1">+ 1 min</button><button class="btn" type="button" data-t="p5">Estudei fora do site: + 5 min</button></div>
+          <label class="f" for="tmr-meta">Minha meta diária (minutos)</label><div class="chips">${[5, 10, 15, 20, 30].map(m => `<label><input type="radio" name="tmr-m" value="${m}"><span>${m}</span></label>`).join('')}</div>
+          <label class="f" for="tmr-cel">Celebrações</label><select id="tmr-cel"><option value="full">Completas</option><option value="soft">Discretas</option><option value="off">Desligadas</option></select></div>
+        <div class="sr-only" aria-live="polite" id="tmr-live"></div></div>`;
+    document.body.appendChild(tUi);
+    const pill = $('.tmr-pill', tUi), p = $('.tmr-p', tUi);
+    pill.onclick = () => { p.hidden = !p.hidden; pill.setAttribute('aria-expanded', String(!p.hidden)); tDraw(); };
+    $('[data-t=go]', tUi).onclick = () => { tRun ? tPause() : tStart(); };
+    $('[data-t=adj]', tUi).onclick = () => { const a = $('.tmr-adj', tUi); a.hidden = !a.hidden; };
+    const add = n => { const x = sd(); x.s = Math.max(0, x.s + n); save(); tCheck(); tDraw(); };
+    $('[data-t=m1]', tUi).onclick = () => add(-60); $('[data-t=p1]', tUi).onclick = () => add(60); $('[data-t=p5]', tUi).onclick = () => add(300);
+    $$('input[name=tmr-m]', tUi).forEach(r => { r.checked = +r.value === metaMin(); r.onchange = () => { S.meta = +r.value; save(); tCheck(); tDraw(); }; });
+    const cel = $('#tmr-cel', tUi); cel.value = S.cel || 'full'; cel.onchange = () => { S.cel = cel.value; save(); };
+    ['pointerdown', 'keydown', 'scroll'].forEach(ev => window.addEventListener(ev, () => { tIdle = Date.now(); }, { passive: true }));
+    document.addEventListener('visibilitychange', () => { if (document.hidden && tRun) { tPause(); tNote = 'Pausamos o relógio enquanto você estava fora.'; tDraw(); } });
+    setInterval(tTick, 15000); tDraw();
+  }
+  function tStart() { tRun = true; tLast = Date.now(); tIdle = Date.now(); tNote = fr('inicio', { min: metaMin() }); tDraw(); live('Relógio iniciado'); }
+  function tPause() { tTick(); tRun = false; tDraw(); live('Relógio pausado'); }
+  function tTick() {
+    if (!tRun) return; const now = Date.now();
+    if (now - tIdle > 3 * 60000) { tRun = false; tNote = 'Pausamos o relógio porque você ficou um tempo parado. Continue quando quiser.'; tDraw(); return; }
+    const x = sd(); x.s += Math.round((now - tLast) / 1000); tLast = now;
+    const left = metaMin() - fmtMin(x.s);
+    if (!x.ok) { if (left === Math.ceil(metaMin() / 2) && metaMin() >= 10) tNote = fr('metade'); else if (left > 0 && left <= 2) tNote = fr('quase', { x: left }); else if (Math.random() < 0.15) tNote = fr('durante'); }
+    try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) { }
+    tCheck(); tDraw();
+  }
+  let tSaveCount = 0;
+  function tCheck() {
+    const x = sd();
+    if (!x.ok && x.s >= metaMin() * 60) { x.ok = true; save(); celebrate(); }
+    else if (++tSaveCount % 8 === 0) save();
+  }
+  function live(t) { const l = $('#tmr-live'); if (l) l.textContent = t; }
+  function tDraw() {
+    if (!tUi) return; const x = sd(), m = metaMin(), done = fmtMin(x.s), frac = Math.min(1, x.s / (m * 60));
+    $('.tmr-arc', tUi).setAttribute('stroke-dashoffset', String(94.25 * (1 - frac)));
+    $('.tmr-txt', tUi).textContent = (x.ok ? '✓ ' : '') + done + '/' + m;
+    const b = $('.tmr-big', tUi); b.textContent = x.ok ? `Meta de hoje cumprida: ${done} min${done > m ? ' (+' + (done - m) + ' extras)' : ''}` : `${done} min de ${m} hoje`;
+    b.setAttribute('aria-valuemax', String(m)); b.setAttribute('aria-valuenow', String(Math.min(done, m))); b.setAttribute('aria-valuetext', `${done} de ${m} minutos`);
+    $('[data-t=go]', tUi).textContent = tRun ? 'Pausar relógio' : (x.s > 0 ? 'Continuar' : `Estudar ${m} min`);
+    $('.tmr-msg', tUi).textContent = tNote || (x.ok ? 'Pode continuar estudando: o tempo extra também conta.' : 'Seu tempo hoje. É uma meta, não um limite.');
+    tUi.classList.toggle('run', tRun);
+    const lv = levelBy((location.hash || '').slice(1)); const cs = getComputedStyle(document.documentElement);
+    tUi.style.setProperty('--lv-cur', lv ? cs.getPropertyValue('--lv' + lv.id).trim() : cs.getPropertyValue('--accent').trim());
+  }
+  function celebrate(kind, vars) {
+    const n = studyDays(), lvNow = (nextLevel() || { id: 7 }).id;
+    let txt = kind === 'nivel' ? fr('nivel', vars) : kind === 'fim' ? fr('fim') : n === 7 ? fr('m7') : n === 30 ? fr('m30') : fr('feito', { n, min: metaMin(), nivel: lvNow });
+    const head = kind ? '' : `Meta de hoje cumprida: ${metaMin()} minutos. `;
+    live(head + txt);
+    const o = document.createElement('div'); o.className = 'cel'; o.setAttribute('role', 'status');
+    o.innerHTML = `<div class="cel-card"><span class="cel-ok" aria-hidden="true">✓</span><div><b>${esc(head || (kind === 'fim' ? 'Parte gratuita concluída' : 'Nível concluído'))}</b><p>${esc(txt)}</p><div class="cta-row"><button class="btn primary" type="button" data-c="x">${kind ? 'Continuar' : 'Encerrar por hoje'}</button>${kind ? '' : '<button class="btn" type="button" data-c="k">Continuar estudando</button>'}</div></div></div>`;
+    document.body.appendChild(o); if (tUi) { const pp = $('.tmr-p', tUi); if (pp) { pp.hidden = true; $('.tmr-pill', tUi).setAttribute('aria-expanded', 'false'); } }
+    const close = () => o.remove(); $('[data-c=x]', o).onclick = () => { if (!kind && tRun) tPause(); close(); }; const k = $('[data-c=k]', o); if (k) k.onclick = close;
+    setTimeout(() => { if (document.body.contains(o)) o.classList.add('fade'); }, 9000); setTimeout(() => { if (document.body.contains(o)) close(); }, 9800);
+    if ((S.cel || 'full') === 'off' || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    confetti((S.cel || 'full') === 'soft' ? 18 : (kind || n === 7 || n === 30 ? 60 : 40), kind ? 2400 : 1400);
+  }
+  function confetti(count, ms) {
+    const cv = document.createElement('canvas'); cv.className = 'confetti'; cv.setAttribute('aria-hidden', 'true'); document.body.appendChild(cv);
+    const dpr = Math.min(2, devicePixelRatio || 1); cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; const c = cv.getContext('2d'); c.scale(dpr, dpr);
+    const cs = getComputedStyle(document.documentElement); const lv = levelBy((location.hash || '').slice(1));
+    const cols = [lv ? cs.getPropertyValue('--lv' + lv.id).trim() : cs.getPropertyValue('--accent').trim(), cs.getPropertyValue('--lv4').trim(), cs.getPropertyValue('--good').trim()];
+    const ox = innerWidth / 2, oy = innerHeight * 0.32;
+    const P = Array.from({ length: count }, () => ({ x: ox, y: oy, vx: (Math.random() - 0.5) * 9, vy: -Math.random() * 7 - 2, r: Math.random() * 5 + 3, c: cols[Math.floor(Math.random() * cols.length)], a: Math.random() * 6 }));
+    const t0 = performance.now();
+    const step = now => { const t = now - t0; c.clearRect(0, 0, innerWidth, innerHeight); const al = Math.max(0, 1 - t / ms);
+      P.forEach(p => { p.vy += 0.28; p.x += p.vx; p.y += p.vy; p.a += 0.15; c.globalAlpha = al; c.fillStyle = p.c; c.save(); c.translate(p.x, p.y); c.rotate(p.a); c.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); c.restore(); });
+      if (t < ms) requestAnimationFrame(step); else cv.remove(); };
+    requestAnimationFrame(step);
+  }
+
   /* ---------- Router ---------- */
   function render() {
     closePop(); $$('[data-video]').forEach(el => el._stop && el._stop()); try { speechSynthesis.cancel(); } catch (e) { }
     const h = (location.hash || '').replace('#', ''); const lv = levelBy(h);
     let html, bind = () => { };
-    if (lv) { html = level(lv); bind = () => bindLevel(lv); }
+    if (lv && lockedPaid(lv.id)) { html = completo(lv); bind = bindCompleto; }
+    else if (lv) { html = level(lv); bind = () => bindLevel(lv); }
+    else if (h === 'inscricao') { html = S.insc ? home() : inscricao(); bind = S.insc ? () => { } : bindInsc; }
+    else if (h === 'completo') { html = completo(null); bind = bindCompleto; }
     else if (h === 'marco-zero') { html = marco(false); bind = () => bindMarco(false); }
     else if (h === 'marco-final') { html = marco(true); bind = () => bindMarco(true); }
     else if (h === 'revisao') { html = review(); bind = bindReview; }
@@ -1691,7 +1935,7 @@ COURSE.marco = [
     app.innerHTML = html; setSync(syncState);
     $$('[data-act="ritual"]').forEach(a => a.onclick = ev => { ev.preventDefault(); ritual(); });
     $$('[data-locked]').forEach(a => a.onclick = ev => ev.preventDefault());
-    bind(); requestAnimationFrame(paintGuils);
+    bind(); requestAnimationFrame(paintGuils); timerMount();
     const titles = { 'revisao': 'Revisão', 'biblioteca': 'Fontes', 'final': 'Prova final', 'constituicao': 'Constituição' };
     if (render._last !== h) { window.scrollTo(0, 0); render._last = h; }
   }
