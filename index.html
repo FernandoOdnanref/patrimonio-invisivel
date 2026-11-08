@@ -3,14 +3,14 @@
 <title>Patrimônio Invisível</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,500..800;1,6..96,500..800&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:ital,opsz,wght@0,7..72,500..800;1,7..72,500..700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: coluna editorial central (max 760px) com faixas de cor por nível, cédulas em grade na home. */
 :root {
   --paper: #ECEFE9; --paper-2: #E2E7E0; --ink: #16232C; --muted: #5B686D; --line: #C6CEC6; --screen: #F6F8F3;
   --accent: #2B5D4F; --accent-ink: #FFFFFF; --good: #2E7D4F; --bad: #B13F2D; --warn: #9A6A0E;
   --lv1: #3E6E8E; --lv2: #6B4C9A; --lv3: #A8423A; --lv4: #8C6A0F; --lv5: #B0592A; --lv6: #1F6F78; --lv7: #7A5F48;
-  --f-display: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
+  --f-display: "Literata", Georgia, "Times New Roman", serif;
   --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --action: #1D5E6A; --action-ink: #FFFFFF;
@@ -31,7 +31,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 [hidden] { display: none !important; }
 a { color: var(--lvc); }
 :focus-visible { outline: 3px solid var(--lvc); outline-offset: 2px; border-radius: 3px; }
-h1, h2, h3 { font-family: var(--f-display); font-weight: 600; text-wrap: balance; line-height: 1.12; letter-spacing: -0.01em; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 650; text-wrap: balance; line-height: 1.15; letter-spacing: -0.005em; }
 h4 { font-size: 1rem; margin: 0 0 .3rem; }
 .lv1 { --lvc: var(--lv1); } .lv2 { --lvc: var(--lv2); } .lv3 { --lvc: var(--lv3); } .lv4 { --lvc: var(--lv4); }
 .lv5 { --lvc: var(--lv5); } .lv6 { --lvc: var(--lv6); } .lv7 { --lvc: var(--lv7); }
@@ -268,6 +268,18 @@ canvas.confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; pointe
 .pixcode { flex: 1; min-width: 0; }
 .pixcode textarea { font-family: var(--f-mono); font-size: .78rem; word-break: break-all; min-height: 90px; }
 @media (max-width: 760px) { .pixrow { flex-direction: column; } .pixqr { order: 2; width: 170px; } .pixcode { width: 100%; } }
+
+/* Leitura confortável no celular */
+@media (max-width: 760px) {
+  body { font-size: 17px; line-height: 1.65; }
+  .small, .ex .desc, .src-list li { font-size: .95rem; }
+  .eyebrow { font-size: .82rem; letter-spacing: .08em; }
+  .kv div span, table.data th, .note .meta, .donechip, .saved, .sync, .vid-time, .debt-row.h { font-size: .8rem; letter-spacing: .03em; }
+  .vid-cap { font-size: 1.02rem; }
+  .lesson p, .lesson li { line-height: 1.7; }
+}
+.adminbar { background: var(--warn); color: var(--paper); font-weight: 700; font-size: .9rem; text-align: center; padding: 6px 12px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.adminbar a { color: inherit; }
 
 body{margin:0} img{max-width:100%}
 </style></head><body>
@@ -1180,7 +1192,7 @@ COURSE.marco = [
     function poster() { C = colors(); size(); const ctx = cv.getContext('2d'); const g = helpers(ctx, cv.width, cv.height, C); g.clear(); g.disp(v.t, g.W / 2, g.H * 0.46, 30, C.ink); g.text(v.scenes.length + ' cenas · ' + fmt(total), g.W / 2, g.H * 0.62, 12, C.muted, 'center'); }
     big.onclick = btn.onclick = () => { playing ? pause() : play(); };
     narr.onchange = () => { if (!narr.checked) try { speechSynthesis.cancel(); speechDone = true; } catch (e) { } };
-    poster(); if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('600 24px "Bodoni Moda"'), document.fonts.load('500 16px "Atkinson Hyperlegible"'), document.fonts.load('700 16px "Atkinson Hyperlegible"')]).then(() => { if (!playing) poster(); }).catch(() => { }); cap.textContent = v.scenes[0].s; tm.textContent = '0:00 / ' + fmt(total);
+    poster(); if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('600 24px "Literata"'), document.fonts.load('500 16px "Atkinson Hyperlegible"'), document.fonts.load('700 16px "Atkinson Hyperlegible"')]).then(() => { if (!playing) poster(); }).catch(() => { }); cap.textContent = v.scenes[0].s; tm.textContent = '0:00 / ' + fmt(total);
     window.addEventListener('resize', () => { if (!playing) poster(); });
     el._stop = () => { if (playing) pause(); };
   };
@@ -1233,7 +1245,7 @@ COURSE.marco = [
 
   /* ---------- Progresso ---------- */
   const passed = id => !!(S.quiz[id] && S.quiz[id].passed);
-  const unlocked = id => id === 1 || passed(id - 1);
+  const unlocked = id => !!S.admin || id === 1 || passed(id - 1);
   const levelBy = slug => L.find(l => l.slug === slug);
   function nextLevel() { for (const l of L) if (!passed(l.id)) return l; return null; }
   function exDone(lv) { return lv.exercicios.filter(e => S.done[e.id]).length; }
@@ -1280,9 +1292,9 @@ COURSE.marco = [
         <a href="#" data-act="ritual">Ritual de hoje ${S.daily[today()] ? '✓' : ''}</a>
         <a href="#revisao">Revisão ${due ? `<span class="badge">${due}</span>` : ''}</a>
         <a href="#biblioteca">Fontes</a>
-        ${passed(7) ? '<a href="#final">Prova final</a>' : ''}
+        ${passed(7) || S.admin ? '<a href="#final">Prova final</a>' : ''}
       </nav><span class="sync" id="sync"></span></div></header>
-      <main class="${cls || ''}">${inner}</main>`;
+      ${S.admin ? '<div class="adminbar">Modo administrador: tudo liberado. <a href="#admin">Painel</a></div>' : ''}<main class="${cls || ''}">${inner}</main>`;
   }
 
   /* ---------- Home ---------- */
@@ -1687,7 +1699,7 @@ COURSE.marco = [
 
   /* ---------- Final e Constituição ---------- */
   function finalPage() {
-    if (!passed(7)) return shell(`<div class="col"><div class="lockmsg"><h2>Prova final bloqueada</h2><p>Passe nos 7 níveis para liberar.</p><a class="btn primary" href="#">Início</a></div></div>`);
+    if (!passed(7) && !S.admin) return shell(`<div class="col"><div class="lockmsg"><h2>Prova final bloqueada</h2><p>Passe nos 7 níveis para liberar.</p><a class="btn primary" href="#">Início</a></div></div>`);
     return shell(`<div class="col" style="padding-top:36px"><span class="eyebrow">Prova de maestria</span><h1 style="font-size:2.6rem">Prova final</h1><p>${COURSE.final.length} questões que misturam os sete níveis. Mínimo de ${passMin(COURSE.final)} acertos. Depois dela você refaz o Marco e recebe sua Constituição Financeira.</p><div id="quiz"></div></div>`);
   }
   function bindFinal() { const el = $('#quiz'); if (!el) return; renderQuiz(el, COURSE.final, r => { const ok = r.score >= passMin(COURSE.final); S.final = { best: Math.max((S.final || {}).best || 0, r.score), passed: ((S.final || {}).passed) || ok }; save(); return ok; }, () => location.hash = 'marco-final'); }
@@ -1725,8 +1737,9 @@ COURSE.marco = [
     linkCompleto: '',      // link de compra da versão completa (preencher)
     codigos: ['PATRIMONIO2027'], // códigos de liberação da versão completa (provisório até existir login)
     nivelGratis: 4,
+    adminCodigo: 'ADMIN-PI-0811', // código do modo administrador (visível no código-fonte; trocar quando houver login)
   };
-  const isFull = () => !!S.full;
+  const isFull = () => !!S.full || !!S.admin;
   const lockedPaid = id => id > CFG.nivelGratis && !isFull();
 
   /* ---------- Frases (biblioteca com rodízio) ---------- */
@@ -1963,6 +1976,26 @@ COURSE.marco = [
     requestAnimationFrame(step);
   }
 
+
+  /* ---------- Modo administrador ---------- */
+  function adminPage() {
+    return shell(`<div class="col" style="padding-top:36px"><span class="eyebrow">Acesso de administrador</span><h1 style="font-size:2.3rem">${S.admin ? 'Modo administrador ativo' : 'Entrar como administrador'}</h1>
+      ${S.admin ? `<p>Todos os 7 níveis, a prova final e a Constituição estão liberados, sem precisar passar nas provas nem ter a versão completa.</p>
+        <div class="ex"><h3>Ferramentas de teste</h3>
+          <div class="cta-row"><a class="btn primary" href="#nivel-1">Ir para o Nível 1</a><a class="btn" href="#nivel-5">Ver Nível 5 (pago)</a><a class="btn" href="#final">Prova final</a><a class="btn" href="#constituicao">Constituição</a><a class="btn" href="#contribuir">Página do Pix</a></div>
+          <div class="cta-row"><button class="btn" type="button" id="ad-form">Ver o formulário de inscrição como aluno novo</button></div>
+          <div class="cta-row"><button class="btn" type="button" id="ad-reset">Zerar todo o meu progresso</button></div><div id="ad-confirm"></div>
+          <div class="cta-row"><button class="btn" type="button" id="ad-out">Sair do modo administrador</button></div></div>`
+      : `<div class="ex"><label class="f" for="ad-cod">Código de administrador</label><input type="text" id="ad-cod" autocomplete="off"><div class="cta-row"><button class="btn primary" type="button" id="ad-ok">Entrar</button></div><p class="formerr" id="ad-err" role="alert" hidden></p></div>`}</div>`);
+  }
+  function bindAdmin() {
+    const ok = $('#ad-ok'); if (ok) { const go = () => { if ($('#ad-cod').value.trim().toUpperCase() === CFG.adminCodigo) { S.admin = true; save(); render(); } else { const e = $('#ad-err'); e.hidden = false; e.textContent = 'Código não reconhecido.'; } }; ok.onclick = go; $('#ad-cod').onkeydown = ev => { if (ev.key === 'Enter') go(); }; return; }
+    $('#ad-out').onclick = () => { S.admin = false; save(); location.hash = ''; render(); };
+    $('#ad-form').onclick = () => { S._verForm = true; location.hash = 'inscricao'; };
+    $('#ad-reset').onclick = () => { $('#ad-confirm').innerHTML = `<div class="callout">Isto apaga inscrição, respostas, provas, ritual e cartões deste navegador. Não dá para desfazer. O modo administrador continua ativo.<div class="cta-row"><button class="btn primary" type="button" id="ad-yes">Apagar meu progresso</button><button class="btn" type="button" id="ad-no">Cancelar</button></div></div>`;
+      $('#ad-no').onclick = () => $('#ad-confirm').innerHTML = '';
+      $('#ad-yes').onclick = () => { S = { v: 1, upd: Date.now(), marco0: null, marcoF: null, quiz: {}, ex: {}, done: {}, daily: {}, srs: {}, final: null, bem: [], admin: true }; save(); if (tUi) { tUi.remove(); tUi = null; } location.hash = ''; render(); }; };
+  }
   /* ---------- Router ---------- */
   function render() {
     closePop(); $$('[data-video]').forEach(el => el._stop && el._stop()); try { speechSynthesis.cancel(); } catch (e) { }
@@ -1970,7 +2003,8 @@ COURSE.marco = [
     let html, bind = () => { };
     if (lv && lockedPaid(lv.id)) { html = completo(lv); bind = bindCompleto; }
     else if (lv) { html = level(lv); bind = () => bindLevel(lv); }
-    else if (h === 'inscricao') { html = S.insc ? home() : inscricao(); bind = S.insc ? () => { } : bindInsc; }
+    else if (h === 'inscricao') { const ver = !S.insc || S._verForm; html = ver ? inscricao() : home(); bind = ver ? bindInsc : () => { }; S._verForm = false; }
+    else if (h === 'admin') { html = adminPage(); bind = bindAdmin; }
     else if (h === 'completo') { html = completo(null); bind = bindCompleto; }
     else if (h === 'contribuir') { html = contribuir(); bind = bindContribuir; }
     else if (h === 'marco-zero') { html = marco(false); bind = () => bindMarco(false); }
