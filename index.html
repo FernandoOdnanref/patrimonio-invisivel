@@ -2978,6 +2978,9 @@ COURSE.marco = [
   /* ---------- Inscrição ---------- */
   const RENDAS = ['Prefiro não informar', 'Até R$ 2.000', 'R$ 2.001 a R$ 5.000', 'R$ 5.001 a R$ 10.000', 'Acima de R$ 10.000'];
   const CONTRIB = [0, 5, 10, 20, 50];
+  const RITMOS = [['1', '1 nível por semana'], ['2', '1 nível a cada 2 semanas'], ['livre', 'No meu ritmo, sem prazo']];
+  const ritmoFrase = r => r === '1' ? 'e a fazer 1 nível por semana até o Nível 4' : r === '2' ? 'e a fazer 1 nível a cada 2 semanas até o Nível 4' : 'e a seguir no meu ritmo, sem pular dias, até o Nível 4';
+  const semLabel = (a, b) => a === b ? 'Semana ' + a : 'Semanas ' + a + ' e ' + b;
   function inscricao() {
     const d = S.inscDraft || { min: '', contrib: 10, dias: {} };
     const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
@@ -2992,6 +2995,8 @@ COURSE.marco = [
         <fieldset class="fs"><legend class="f">Em que dias e horário você vai reservar esse tempo?</legend><p class="small">Escolha os dias e a hora que cabem de verdade na sua rotina.</p>
           <div class="chips">${dias.map((n, i) => `<label><input type="checkbox" name="in-dia" value="${i}" ${d.dias && d.dias[i] ? 'checked' : ''}><span>${n}</span></label>`).join('')}</div>
           <label class="f" for="in-hora">Horário</label><input type="time" id="in-hora" value="${esc(d.hora || '')}" style="max-width:160px"></fieldset>
+        <fieldset class="fs"><legend class="f">Em que ritmo você quer avançar?</legend><p class="small">Cada nível tem de 10 a 13 paradas curtas. Escolha o que cabe na sua semana.</p>
+          <div class="chips">${RITMOS.map(([k, t]) => `<label><input type="radio" name="in-rit" value="${k}" ${d.ritmo === k ? 'checked' : ''}><span>${t}</span></label>`).join('')}</div></fieldset>
         <fieldset class="fs"><legend class="f">Para indicar o melhor caminho para você <span class="small">(opcional)</span></legend>
           <label class="f" for="in-renda">Renda mensal da casa</label><select id="in-renda">${RENDAS.map(r => `<option ${d.renda === r ? 'selected' : ''}>${r}</option>`).join('')}</select>
           <label class="check"><input type="checkbox" id="in-atraso" ${d.atraso ? 'checked' : ''}><span>Tenho alguma conta ou dívida em atraso</span></label>
@@ -3008,31 +3013,31 @@ COURSE.marco = [
   }
   function bindInsc() {
     const f = $('#insc'), get = () => { const mr = $('input[name=in-min]:checked', f), cr = $('input[name=in-ct]:checked', f); const dias = {}; $$('input[name=in-dia]', f).forEach(c => { if (c.checked) dias[c.value] = true; });
-      return { nome: $('#in-nome').value.trim().slice(0, 60), quer: $('#in-quer').value.slice(0, 1500), tentou: $('#in-tentou').value.slice(0, 1500), min: mr ? (mr.value === 'x' ? ($('#in-minx').value ? Math.max(3, Math.min(60, +$('#in-minx').value)) : '') : +mr.value) : '', dias, hora: $('#in-hora').value, renda: $('#in-renda').value, atraso: $('#in-atraso').checked, comp: $('#in-comp').checked, contrib: cr ? (cr.value === 'x' ? Math.max(0, +$('#in-ctx').value || 0) : +cr.value) : 0 }; };
+      return { nome: $('#in-nome').value.trim().slice(0, 60), quer: $('#in-quer').value.slice(0, 1500), tentou: $('#in-tentou').value.slice(0, 1500), min: mr ? (mr.value === 'x' ? ($('#in-minx').value ? Math.max(3, Math.min(60, +$('#in-minx').value)) : '') : +mr.value) : '', dias, hora: $('#in-hora').value, renda: $('#in-renda').value, atraso: $('#in-atraso').checked, comp: $('#in-comp').checked, contrib: cr ? (cr.value === 'x' ? Math.max(0, +$('#in-ctx').value || 0) : +cr.value) : 0, ritmo: ($('input[name=in-rit]:checked', f) || {}).value || '' }; };
     const nomes = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
     const upd = () => { if (!document.getElementById('in-nome')) return; const d = get(); const ds = Object.keys(d.dias).map(Number).sort(); const dtxt = ds.length === 7 ? 'todos os dias' : ds.length ? ds.map(i => nomes[i]).join(', ') : 'nos dias que escolhi';
-      const falta = !d.min || !ds.length || !d.hora;
-      $('#in-comptxt').textContent = falta ? 'Escolha acima quantos minutos, em que dias e a que horas você vai estudar. Seu compromisso aparece aqui.' : `Eu me comprometo a estudar ${d.min} minutos por dia, ${ds.length === 7 ? 'todos os dias' : 'nestes dias: ' + ds.map(i => nomes[i]).join(', ').replace(/, ([^,]*)$/, ' e $1')}, às ${d.hora}, e a fazer 1 nível por semana até o Nível 4.`;
+      const falta = !d.min || !ds.length || !d.hora || !d.ritmo;
+      $('#in-comptxt').textContent = falta ? 'Escolha acima quantos minutos, em que dias, a que horas e em que ritmo você vai estudar. Seu compromisso aparece aqui.' : `Eu me comprometo a estudar ${d.min} minutos por dia, ${ds.length === 7 ? 'todos os dias' : 'nestes dias: ' + ds.map(i => nomes[i]).join(', ').replace(/, ([^,]*)$/, ' e $1')}, às ${d.hora}, ${ritmoFrase(d.ritmo)}.`;
       const cb = $('#in-comp'); cb.disabled = falta; if (falta) cb.checked = false; S.inscDraft = d; };
     f.addEventListener('input', debounce(() => { upd(); try { localStorage.setItem(LS, JSON.stringify(S)); } catch (e) { } }, 250)); f.addEventListener('change', upd); f.addEventListener('input', () => { $('#in-err').hidden = true; }); upd();
     f.onsubmit = ev => { ev.preventDefault(); const d = get(); const err = $('#in-err');
-      const miss = !d.nome ? 'Diga como podemos te chamar.' : d.quer.trim().length < 8 ? 'Conte em uma ou duas frases o que você quer mudar.' : !d.min ? 'Escolha quantos minutos por dia você quer estudar.' : !Object.keys(d.dias).length ? 'Escolha pelo menos um dia da semana.' : !d.hora ? 'Escolha o horário em que você vai estudar.' : !d.comp ? 'Marque o compromisso para continuar. Ele é a primeira tarefa do curso.' : '';
+      const miss = !d.nome ? 'Diga como podemos te chamar.' : d.quer.trim().length < 8 ? 'Conte em uma ou duas frases o que você quer mudar.' : !d.min ? 'Escolha quantos minutos por dia você quer estudar.' : !Object.keys(d.dias).length ? 'Escolha pelo menos um dia da semana.' : !d.hora ? 'Escolha o horário em que você vai estudar.' : !d.ritmo ? 'Escolha o seu ritmo: por semana, a cada 2 semanas ou no seu ritmo.' : !d.comp ? 'Marque o compromisso para continuar. Ele é a primeira tarefa do curso.' : '';
       if (miss) { err.hidden = false; err.textContent = miss; return; }
       S.insc = Object.assign(d, { em: today() }); S.meta = d.min; delete S.inscDraft; save(); planReveal(); };
   }
   function planReveal() {
     const d = S.insc, box = $('#insc'); box.innerHTML = `<div class="building" role="status"><div class="spin" aria-hidden="true"></div><p id="bld">Lendo suas respostas…</p></div>`;
-    const steps = ['Lendo suas respostas…', 'Ajustando o ritmo para ' + d.min + ' minutos por dia…', 'Organizando os Níveis 1 a 4 em 4 semanas…', 'Seu plano está pronto.'];
+    const steps = ['Lendo suas respostas…', 'Ajustando o ritmo para ' + d.min + ' minutos por dia…', (d.ritmo === 'livre' ? 'Organizando os Níveis 1 a 4 no seu ritmo…' : 'Organizando os Níveis 1 a 4 em ' + (d.ritmo === '2' ? 8 : 4) + ' semanas…'), 'Seu plano está pronto.'];
     const rm = matchMedia('(prefers-reduced-motion: reduce)').matches; let k = 0;
     const tick = () => { k++; if (k < steps.length) { $('#bld').textContent = steps[k]; setTimeout(tick, rm ? 300 : 900); } else showPlan(); };
     setTimeout(tick, rm ? 300 : 900);
   }
   function showPlan() {
     const d = S.insc, box = $('#insc'); const pix = d.contrib > 0;
-    const sem = [['Semana 1', 'Nível 1 · Encarar os números'], ['Semanas 2 e 3', 'Nível 2 · Estancar e sair do aperto'], ['Semana 4', 'Nível 3 · Reescrever as crenças'], ['Semana 5', 'Nível 4 · Piloto automático']];
+    const k = d.ritmo === '2' ? 2 : 1; const sem = L.slice(0, 4).map((l, i) => [d.ritmo === 'livre' ? 'Passo ' + (i + 1) : semLabel(i * k + 1, i * k + k), 'Nível ' + l.id + ' · ' + l.titulo]);
     box.innerHTML = `<span class="eyebrow">Inscrição confirmada</span><h2 style="margin-top:6px">${esc(d.nome)}, seu plano está pronto</h2>
       <p>${esc(fr('boas'))}</p>
-      <div class="kv"><div><span>Meta diária</span><b>${d.min} min</b></div><div><span>Horário</span><b>${esc(d.hora || '—')}</b></div><div><span>Parte gratuita</span><b>Níveis 1 a 4</b></div></div>
+      <div class="kv"><div><span>Meta diária</span><b>${d.min} min</b></div><div><span>Horário</span><b>${esc(d.hora || '—')}</b></div><div><span>Ritmo</span><b>${esc((RITMOS.find(r => r[0] === d.ritmo) || [, '1 nível por semana'])[1])}</b></div><div><span>Parte gratuita</span><b>Níveis 1 a 4</b></div></div>
       <ol class="steps" style="margin-top:14px">${sem.map(s => `<li><b>${s[0]}:</b> ${s[1]}</li>`).join('')}</ol>
       <div class="callout"><b>Seu objetivo:</b> ${esc(d.quer)}</div>
       ${pix ? `<div class="callout">Obrigado por contribuir. Seu acesso já está liberado, com ou sem o pagamento.</div>${pixBox(d.contrib)}` : '<p class="small">Sem contribuição hoje. Seu acesso está liberado do mesmo jeito. Se um dia quiser contribuir, o link fica no rodapé da página inicial.</p>'}
