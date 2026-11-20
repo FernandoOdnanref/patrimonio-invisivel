@@ -365,6 +365,105 @@ canvas.confetti { position: fixed; inset: 0; width: 100vw; height: 100vh; pointe
   .debt-row .x { position: absolute; top: 4px; right: 6px; }
 }
 
+/* ---------- Página inicial simplificada ---------- */
+.home2 { padding-top: 26px; padding-bottom: 40px; }
+.home2 h1 { font-size: 2.2rem; line-height: 1.15; margin: 8px 0 12px; }
+.home2 h1.hi { font-size: 1.9rem; }
+.btn.big { font-size: 1.05rem; padding: 12px 22px; }
+.next { border: 2px solid var(--lvc); border-radius: 18px; padding: 18px 20px; background: color-mix(in srgb, var(--lvc) 7%, var(--screen)); }
+.next h2 { font-size: 1.5rem; margin: 4px 0 8px; }
+.next p { margin: 0 0 12px; font-size: 1.05rem; }
+.next .pbar { margin: 4px 0 16px; }
+.today { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.today > * { border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; background: var(--paper); color: var(--ink); text-decoration: none; display: flex; flex-direction: column; gap: 2px; }
+.today b { font-size: 1.05rem; } .today small { color: var(--muted); font-size: .88rem; }
+.path { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.path li > a, .path li > div { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); text-decoration: none; }
+.path li.now > a { border: 2px solid var(--lvc); background: color-mix(in srgb, var(--lvc) 7%, var(--screen)); }
+.path li.lock > a, .path li.lock > div { opacity: .62; }
+.path .pn { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; background: color-mix(in srgb, var(--lvc) 16%, transparent); color: var(--lvc); }
+.path li.done .pn { background: var(--good); color: #fff; }
+.path .pt { display: flex; flex-direction: column; gap: 2px; } .path .pt b { font-size: 1.04rem; } .path .pt small { color: var(--muted); font-size: .88rem; }
+.path .pt small .ok { color: var(--good); font-weight: 700; }
+.path .pa { color: var(--muted); }
+.how3 { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.how3 li { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: start; }
+.how3 li > span { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+.how3 p { margin: 2px 0 0; color: var(--muted); }
+.home2 .links { margin-top: 22px; font-size: .95rem; }
+.home2 .disclaimer { margin-top: 18px; font-size: .82rem; color: var(--muted); border: 0; padding: 0; background: none; }
+.sync { display: none; }
+
+/* ---------- Navegação (referências: Duolingo, Khan, Babbel, NN/g) ---------- */
+.tabs { display: flex; gap: 4px; }
+.tabs a { display: flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 700; font-size: .92rem; }
+.tabs a .ico { width: 20px; height: 20px; }
+.tabs a.on { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+@media (max-width: 760px) {
+  .tabs { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--paper); border-top: 1px solid var(--line); justify-content: space-around; padding: 6px 4px max(6px, env(safe-area-inset-bottom, 0px)); gap: 0; }
+  .tabs a { flex-direction: column; gap: 2px; font-size: .74rem; padding: 4px 6px; border-radius: 10px; flex: 1; }
+  .tabs a.on { background: none; }
+  .tabs a.on .ico { stroke-width: 2.4; }
+  .tabs a.on span { text-decoration: underline; text-underline-offset: 3px; }
+  .tabs.in-level { display: none; }
+  main.has-tabs { padding-bottom: 78px; }
+  body:has(main.has-tabs:not(.in-level)) .tmr { display: none; }
+  .tabs-top { display: none; }
+}
+.path li > button { width: 100%; text-align: left; font: inherit; cursor: pointer; display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); }
+.path li.lock > button { opacity: .7; }
+.path li.lock .pn { background: var(--line); color: var(--muted); font-size: .9rem; }
+.path li.paid > button { border-color: #C9A24A; }
+.path li.paid .pn { background: color-mix(in srgb, #C9A24A 22%, transparent); color: #8A6A12; }
+.path li.now > a { box-shadow: 0 0 0 3px color-mix(in srgb, var(--lvc) 22%, transparent); }
+.path .lvn { font-family: var(--f-mono); font-size: .7rem !important; letter-spacing: .08em; text-transform: uppercase; }
+.free { color: var(--good); font-weight: 700; } .star { color: #8A6A12; font-weight: 700; }
+.legend { margin-top: 8px; }
+.freepaid { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; font-size: 1.02rem; }
+.where { font-size: 1.05rem; margin: 0 0 6px; }
+.todo { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.todo li, .todo li a { display: flex; gap: 10px; align-items: center; color: var(--ink); text-decoration: none; font-size: 1.02rem; }
+.todo li span { width: 24px; height: 24px; border: 2px solid var(--line); border-radius: 7px; display: grid; place-items: center; font-weight: 700; color: #fff; flex: none; }
+.todo li.ok span { background: var(--good); border-color: var(--good); }
+.todo li.ok { color: var(--muted); }
+.week { margin-top: 14px; padding: 10px 14px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); font-size: .98rem; }
+.menu-list { list-style: none; padding: 0; margin: 14px 0 0; display: grid; gap: 8px; }
+.menu-list a { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); color: var(--ink); text-decoration: none; }
+.menu-list .mi { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent); }
+.menu-list b { display: block; } .menu-list small { color: var(--muted); font-size: .88rem; }
+.sheet-bg { position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 70; display: flex; align-items: flex-end; justify-content: center; }
+.sheet { background: var(--screen); width: min(560px, 100%); border-radius: 20px 20px 0 0; padding: 20px 20px max(20px, env(safe-area-inset-bottom, 0px)); box-shadow: 0 -10px 40px rgba(0,0,0,.2); }
+.sheet b, .sheet .star { font-size: 1.1rem; } .sheet p { font-size: 1.02rem; }
+.trail-top .back { font-weight: 700; text-decoration: none; color: var(--lvc); font-size: 1rem; }
+.trail-t { font-size: 1.4rem; margin: 6px 0 2px; }
+.nextlv { margin-top: 14px; color: var(--muted); }
+.h-sm small { font-size: .8rem; color: var(--muted); font-weight: 500; }
+
+@media (min-width: 761px) { .tabs-bottom { display: none; } }
+
+/* ---------- Aula em formato de apresentação ---------- */
+.deck-head { margin-bottom: 12px; }
+.deck-head h1 { font-size: 1.5rem; line-height: 1.2; margin: 4px 0 4px; }
+.deck { position: relative; aspect-ratio: 16 / 9; background: var(--screen); border: 1px solid var(--line); border-top: 6px solid var(--lvc); border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,.08); display: flex; flex-direction: column; overflow: hidden; outline: none; }
+.deck:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--lvc) 40%, transparent); }
+.deck-in { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; }
+.deck .slide { min-height: 0; padding: 18px 24px; }
+.deck .slide.qz { text-align: left; align-items: stretch; width: 100%; max-width: 560px; }
+.deck .chk label { background: var(--paper); }
+.deck-foot { display: flex; justify-content: space-between; align-items: center; padding: 6px 12px; font-family: var(--f-mono); font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line); }
+.deck-fs { border: 0; background: none; color: var(--muted); font-size: 1.1rem; cursor: pointer; }
+.deck:fullscreen { border-radius: 0; aspect-ratio: auto; }
+.deck:fullscreen .slide h2 { font-size: 2.6rem; } .deck:fullscreen .slide p { font-size: 1.6rem; max-width: 34ch; }
+.deck-ctrl { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: 12px; }
+.stop:has(.deck) { background: transparent; border: 0; padding: 0; }
+@media (max-width: 600px) {
+  .deck { aspect-ratio: 4 / 5; }
+  .deck-head h1 { font-size: 1.3rem; }
+  .deck-ctrl .btn { padding: 10px 14px; }
+}
+.deck:has(.qz) { aspect-ratio: auto; min-height: 320px; }
+.trail:has(.deck) .trail-t { display: none; }
+
 body{margin:0} img{max-width:100%}
 </style></head><body>
 <div id="app"></div>
@@ -2043,6 +2142,7 @@ COURSE.marco = [
   }
 
   window.PI_ICO = {
+    home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/>',
     eye: '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
     loop: '<path d="M4 12a8 8 0 0 1 14-5l2-2v6h-6l2-2a5 5 0 1 0 1 6"/>',
     hide: '<circle cx="12" cy="7" r="3"/><path d="M5 21c1-5 4-8 7-8s6 3 7 8"/><path d="M3 3l18 18"/>',
@@ -2483,64 +2583,104 @@ COURSE.marco = [
   /* ---------- Shell ---------- */
   const app = document.getElementById('app');
   function shell(inner, cls) {
-    const due = dueCards().length; const days = Object.keys(S.daily).length;
+    const h = (location.hash || '').replace('#', ''), inLevel = !!levelBy(h);
+    const tab = h === '' ? 'inicio' : h === 'trilha' || inLevel ? 'trilha' : ['ferramentas', 'revisao', 'biblioteca'].includes(h) ? 'ferramentas' : ['eu', 'plano', 'contribuir', 'constituicao', 'marco-zero', 'marco-final', 'admin', 'final', 'completo'].includes(h) ? 'eu' : '';
+    const T = [['inicio', '', 'Início', 'home'], ['trilha', 'trilha', 'Trilha', 'flag'], ['ferramentas', 'ferramentas', 'Ferramentas', 'bag'], ['eu', 'eu', 'Eu', 'person']];
+    const tabs = S.insc ? `<nav class="tabs ${inLevel ? 'in-level' : ''}" aria-label="Principal">${T.map(([k, href, t, ic]) => `<a href="#${href}" class="${tab === k ? 'on' : ''}" ${tab === k ? 'aria-current="page"' : ''}>${ico(ic, 22)}<span>${t}</span></a>`).join('')}</nav>` : '';
     return `<header class="top"><div class="top-in">
       <a class="brand" href="#"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2 2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>Patrimônio Invisível</a>
-      <nav class="nav" aria-label="Principal">
-        <a href="#" data-act="ritual">Ritual de hoje ${S.daily[today()] ? '✓' : ''}</a>
-        <a href="#revisao">Revisão ${due ? `<span class="badge">${due}</span>` : ''}</a>
-        <a href="#biblioteca">Fontes</a>
-        ${passed(7) || S.admin ? '<a href="#final">Prova final</a>' : ''}
-      </nav><span class="sync" id="sync"></span></div></header>
-      ${S.admin ? '<div class="adminbar">Modo administrador: tudo liberado. <a href="#admin">Painel</a></div>' : ''}<main class="${cls || ''}">${inner}</main>`;
+      <span class="tabs-top">${tabs}</span><span class="sync" id="sync"></span></div></header>
+      ${S.admin ? '<div class="adminbar">Modo administrador: tudo liberado. <a href="#admin">Painel</a></div>' : ''}<main class="${cls || ''} ${S.insc ? 'has-tabs' : ''} ${inLevel ? 'in-level' : ''}">${inner}</main><div class="tabs-bottom">${tabs}</div>`;
   }
 
   /* ---------- Home ---------- */
+  function lvState(l) {
+    const paid = lockedPaid(l.id), lock = !paid && !unlocked(l.id), ps = passed(l.id);
+    const st = (S.trail || {})[l.id], steps = l.trilha ? trailSteps(l) : [], nd = l.trilha ? steps.filter(x => stepDone(l, st || { ok: {} }, x)).length : 0;
+    return { paid, lock, ps, nd, n: steps.length, cur: st ? Math.min(st.at, steps.length - 1) : 0, steps, st };
+  }
+  function pathList(opts) {
+    const nx = nextLevel();
+    return `<ol class="path">${L.map(l => { const r = lvState(l), now = nx && nx.id === l.id && !r.paid && S.insc;
+      const status = r.ps ? '<span class="ok">✓ Feito</span>' : r.paid ? '<span class="star">★ Versão completa</span>' : r.lock ? 'Abre quando você terminar o Nível ' + (l.id - 1) : now ? (r.nd ? `Você está aqui · ${r.nd} de ${r.n} paradas` : 'Você está aqui') : (opts && opts.visitor && l.id <= CFG.nivelGratis ? '<span class="free">Grátis</span>' : 'Pronto para começar');
+      const icon = r.ps ? '✓' : r.paid ? '★' : r.lock ? '🔒' : l.id;
+      const act = r.paid ? `data-sheet="pago" data-lv="${l.id}"` : r.lock || (opts && opts.visitor) ? `data-sheet="${opts && opts.visitor ? 'visit' : 'seq'}" data-lv="${l.id}"` : '';
+      return `<li class="${l.cor} ${r.ps ? 'done' : ''} ${r.lock ? 'lock' : ''} ${r.paid ? 'paid' : ''} ${now ? 'now' : ''}">${act ? `<button type="button" ${act}>` : `<a href="#${l.slug}">`}<span class="pn">${icon}</span><span class="pt"><small class="lvn">Nível ${l.id}</small><b>${esc(l.titulo)}</b><small>${status}</small></span><span class="pa" aria-hidden="true">›</span>${act ? '</button>' : '</a>'}</li>`; }).join('')}</ol>
+      <p class="small legend">🔒 abre quando você terminar o nível anterior · ★ faz parte da versão completa</p>`;
+  }
+  function bindSheets() {
+    $$('[data-sheet]').forEach(b => b.onclick = () => { const l = L.find(x => x.id === +b.dataset.lv), k = b.dataset.sheet, nx = nextLevel();
+      const body = k === 'pago' ? `<span class="star">★ Nível ${l.id} · ${esc(l.titulo)}</span><p>Este nível faz parte da versão completa (Níveis 5 a 7). A parte grátis vai até o Nível 4.</p><div class="cta-row"><a class="btn primary" href="#completo">Ver como liberar</a><button class="btn" type="button" data-x>Agora não</button></div>`
+        : k === 'visit' ? `<b>Nível ${l.id} · ${esc(l.titulo)}</b><p>${l.id === 1 ? 'É por aqui que todo mundo começa.' : 'Ele abre quando você terminar o nível anterior.'} Para começar, faça a inscrição grátis: leva 3 minutos e não pede cartão.</p><div class="cta-row"><a class="btn primary" href="#inscricao">Começar grátis</a><button class="btn" type="button" data-x>Agora não</button></div>`
+        : `<b>🔒 Nível ${l.id} · ${esc(l.titulo)}</b><p>Ainda não. Ele abre quando você terminar o Nível ${l.id - 1}${(() => { const r = nx ? lvState(nx) : null; return r && r.n ? `. Faltam ${r.n - r.nd} paradas no Nível ${nx.id}` : ''; })()}.</p><div class="cta-row">${nx ? `<a class="btn primary" href="#${nx.slug}">Ir para minha parada atual</a>` : ''}<button class="btn" type="button" data-x>Fechar</button></div>`;
+      const o = document.createElement('div'); o.className = 'sheet-bg'; o.innerHTML = `<div class="sheet" role="dialog" aria-modal="true">${body}</div>`; document.body.appendChild(o);
+      const close = () => o.remove(); o.onclick = ev => { if (ev.target === o || ev.target.closest('[data-x]') || ev.target.closest('a')) close(); }; const f = $('.sheet .btn', o); if (f) f.focus(); });
+  }
+  function weekCount() { const d = new Date(today() + 'T12:00:00'), dow = (d.getDay() + 6) % 7; let n = 0; for (let k = 0; k <= dow; k++) { const x = addDays(today(), -k); if ((S.act || {})[x] || (S.study && S.study[x] && (S.study[x].ok || S.study[x].s > 60))) n++; } return n; }
   function home() {
-    const nx = nextLevel(); const totalPass = L.filter(l => passed(l.id)).length; const days = Object.keys(S.daily).length;
-    const notes = L.map(l => {
-      const paid = lockedPaid(l.id), lock = !paid && !unlocked(l.id), ps = passed(l.id);
-      return `<a class="note ${l.cor} ${lock || paid ? 'locked' : ''} ${ps ? 'passed' : ''}" href="${paid ? '#completo' : lock ? '#' : '#' + l.slug}" ${lock ? 'aria-disabled="true" data-locked="1"' : ''}>
-        <canvas data-guil="${l.id}" data-seed="${l.id * 3}" data-rings="18" aria-hidden="true"></canvas>
-        <span class="val">${l.nota}</span><span class="eyebrow">Nível ${l.id} · ${l.semana}</span><h3>${esc(l.titulo)}</h3>
-        <span class="meta"><span>${paid ? 'versão completa' : lock ? 'bloqueado' : ps ? 'nota ' + S.quiz[l.id].best + '/' + l.prova.length : exDone(l) + '/' + l.exercicios.length + ' exercícios'}</span><span>${lock ? '' : '→'}</span></span></a>`;
-    }).join('');
-    return shell(`<div class="wrap">
-      <section class="hero">
-        <div>${greeting()}<span class="eyebrow">Curso de transformação financeira · 7 níveis · 8 semanas · Níveis 1 a 4 gratuitos</span>
-          <h1>Riqueza é o que você <em>não vê</em>.</h1>
-          <p class="lead">Um curso para mudar o que acontece no automático quando o dinheiro aparece: sair do aperto, desmontar crenças, decidir sem medo, ganhar mais sem trabalhar mais e acumular patrimônio com saúde. Cada afirmação tem fonte; cada nível termina numa prova.</p>
-          <div class="cta-row">${!S.insc ? '<a class="btn primary" href="#inscricao">Começar grátis: inscrição de 3 minutos</a>' : !S.marco0 ? '<a class="btn primary" href="#marco-zero">Próximo passo: Marco Zero</a>' : nx ? `<a class="btn primary" href="#${nx.slug}">Continuar: Nível ${nx.id}</a>` : '<a class="btn primary" href="#constituicao">Ver minha Constituição Financeira</a>'}
-            <a class="btn" href="#biblioteca">Ver as ${countSrc()} fontes</a></div>
-          <div class="statline"><span><b>${totalPass}/7</b>níveis aprovados</span><span><b>${studyDays()}</b>dias de estudo</span><span><b>${days}</b>dias de ritual</span><span><b>${Object.keys(S.srs).length}</b>cartões na memória</span></div>
-        </div>
-        <div class="hero-art"><canvas data-guil="a" data-seed="11" data-rings="40" aria-hidden="true"></canvas><div class="seal"><div><span>patrimônio líquido</span><b>${S.ex.n1_networth && S.ex.n1_networth._res != null ? brl(S.ex.n1_networth._res) : 'R$ ?'}</b><span>${S.ex.n1_networth && S.ex.n1_networth._res != null ? 'seu número de hoje' : 'descubra no Nível 1'}</span></div></div></div>
-      </section>
-      <div class="section-h"><h2>Sete cédulas para conquistar</h2><span class="small">Cada nível libera o próximo quando você passa na prova (mínimo 6 de 7).</span></div>
-      <div class="notes">${notes}</div>
-      <div class="section-h"><h2>Como o curso muda o automático</h2></div>
-      <div class="how">
-        <div><h4>Ver</h4><p>Vídeos animados e aulas curtas, com os dados reais do Brasil de 2026 e a fonte de cada número.</p></div>
-        <div><h4>Fazer</h4><p>Exercícios que usam seus próprios números e ficam salvos: raio-X, plano de ataque, hora real, número da liberdade.</p></div>
-        <div><h4>Repetir</h4><p>Ritual diário de 2 minutos e cartões de revisão espaçada nos dias 1, 2, 4, 7, 14 e 30. É assim que uma regra vira hábito.</p></div>
-        <div><h4>Provar</h4><p>Provas de estudo de caso para avançar. No fim, sua Constituição Financeira reúne as regras que você escreveu.</p></div>
-      </div>
+    const nx = nextLevel();
+    if (!S.insc) return shell(`<div class="col home2">
+      <h1>Saia do aperto e organize o seu dinheiro, um passo por vez.</h1>
+      <p class="lead">7 níveis curtos, divididos em paradas de poucos minutos. Você não precisa saber nada de finanças.</p>
+      <div class="cta-row"><a class="btn primary big" href="#inscricao">Começar grátis · Nível 1</a></div><p class="small">Inscrição rápida, sem cartão. Leva 3 minutos.</p>
+      <h2 class="h-sm">Seu caminho</h2>${pathList({ visitor: true })}
+      <h2 class="h-sm">Como funciona</h2>
+      <ol class="how3"><li><span>${ico('play', 26)}</span><div><b>Faça uma parada por vez</b><p>Um vídeo curto, cartões com o essencial ou um exercício guiado.</p></div></li>
+        <li><span>${ico('pencil', 26)}</span><div><b>Use os seus números</b><p>Cada exercício tem passo a passo e um exemplo pronto.</p></div></li>
+        <li><span>${ico('trophy', 26)}</span><div><b>Veja o seu avanço</b><p>Cada nível termina num desafio rápido e libera o próximo.</p></div></li></ol>
+      <h2 class="h-sm">O que é grátis e o que é pago</h2>
+      <ul class="freepaid"><li><span class="free">✓</span> Níveis 1 a 4: grátis</li><li><span class="star">★</span> Níveis 5 a 7: versão completa</li></ul>
+      <div class="cta-row"><a class="btn primary big" href="#inscricao">Começar grátis · Nível 1</a></div>
+      <p class="disclaimer">Material educativo baseado em pesquisa. Não é recomendação de investimento nem aconselhamento jurídico ou psicológico. Se a ansiedade com dinheiro estiver forte, procure ajuda; o CVV atende pelo 188.</p></div>`);
+    const gap = lastStudyGap(), nome = esc(S.insc.nome || '');
+    let where = '', card;
+    if (!S.marco0) card = `<span class="eyebrow">Antes da primeira parada · 2 min</span><h2>Teste rápido: de onde você parte</h2><p>Seis notas de 0 a 10 sobre como você está hoje. No fim do curso, você compara.</p><a class="btn primary big" href="#marco-zero">Começar o teste</a>`;
+    else if (nx && !lockedPaid(nx.id)) { const r = lvState(nx), cs = r.steps[r.cur];
+      where = `<p class="where">Você está no <b>Nível ${nx.id} de 7</b> · ${esc(nx.titulo)}</p><div class="pbar"><i style="width:${r.n ? 100 * r.nd / r.n : 0}%"></i></div><p class="small">${r.nd} de ${r.n} paradas feitas</p>`;
+      const first = !r.nd && nx.id === 1;
+      card = `<span class="eyebrow">${first ? 'Sua primeira parada' : gap && gap >= 2 ? 'Que bom te ver de volta! Você parou em' : 'Próxima parada'}</span><h2>${esc(cs ? cs.t : nx.titulo)}</h2><p>⏱ cerca de ${cs ? cs.min : 5} min · parada ${r.cur + 1} de ${r.n}</p><a class="btn primary big" href="#${nx.slug}">${first ? 'Começar' : 'Continuar'} ▶</a>`; }
+    else if (nx) card = `<span class="eyebrow">Parte grátis concluída</span><h2>Parabéns! Você terminou o Nível ${CFG.nivelGratis}.</h2><p>Os Níveis 5 a 7 fazem parte da versão completa.</p><a class="btn primary big" href="#completo">Ver como liberar o Nível 5</a>`;
+    else card = `<span class="eyebrow">Curso concluído</span><h2>Você concluiu os 7 níveis!</h2><a class="btn primary big" href="#constituicao">Ver minha Constituição Financeira</a>`;
+    const nd = Object.keys(S.insc.dias || {}).length || 3, wk = weekCount(), x = sd(), m = metaMin(), due = dueCards().length;
+    return shell(`<div class="col home2">
+      <h1 class="hi">Oi, ${nome}!</h1>${where}
+      <section class="next ${nx ? nx.cor : ''}">${card}</section>
+      <p><a href="#trilha">Ver minha trilha completa ›</a></p>
+      <h2 class="h-sm">Hoje <small>(opcional)</small></h2>
+      <ul class="todo"><li class="${(S.act || {})[today()] ? 'ok' : ''}"><span>${(S.act || {})[today()] ? '✓' : ''}</span>Fazer 1 parada</li>
+        <li class="${S.daily[today()] ? 'ok' : ''}"><a href="#" data-act="ritual"><span>${S.daily[today()] ? '✓' : ''}</span>Anotar os gastos do dia (2 min)</a></li>
+        ${due ? `<li><a href="#revisao"><span></span>Revisar ${due} cartão(ões)</a></li>` : ''}</ul>
+      <div class="week">Sua semana: <b>${wk} de ${nd} dias</b> ${wk >= nd ? '✓ meta cumprida' : ''} · hoje ${fmtMin(x.s)} de ${m} min</div>
       ${S.marco0 ? marcoCompare() : ''}
-      <p class="small" style="margin-top:20px">O curso é gratuito até o Nível 4. <a href="#contribuir">Contribuir com as bolsas (Pix)</a></p>
-      <p class="disclaimer">Material educacional baseado em pesquisa. Não é recomendação de investimento, nem aconselhamento jurídico ou psicológico individual. Dados de mercado de setembro a novembro de 2026: confira os números atuais antes de decidir. Se a ansiedade com dinheiro estiver intensa, procure um profissional de saúde mental; o CVV atende pelo telefone 188.</p>
     </div>`);
+  }
+  function trilhaPage() {
+    return shell(`<div class="col home2"><h1 class="hi">Sua trilha</h1><p>São 7 níveis. Cada um abre quando você termina o anterior.</p>${pathList()}</div>`);
+  }
+  function ferramentasPage() {
+    const due = dueCards().length;
+    const it = [['#', 'ritual', 'pencil', 'Ritual de 2 minutos', 'Anote os gastos de hoje e a vontade de gastar.'], ['#revisao', '', 'loop', 'Revisão' + (due ? ` · ${due} hoje` : ''), 'Cartões que voltam para você não esquecer.'], ['#biblioteca', '', 'book', 'Fontes do curso', `As ${countSrc()} pesquisas e dados por trás de cada número.`]];
+    if (passed(7) || S.admin) it.push(['#final', '', 'trophy', 'Prova final', 'Para quem terminou os 7 níveis.']);
+    return shell(`<div class="col home2"><h1 class="hi">Ferramentas</h1><p>Seus exercícios ficam dentro de cada nível, salvos automaticamente.</p><ul class="menu-list">${it.map(([h, act, ic, t, d]) => `<li><a href="${h}" ${act ? 'data-act="ritual"' : ''}><span class="mi">${ico(ic, 22)}</span><span><b>${t}</b><small>${d}</small></span><span class="pa">›</span></a></li>`).join('')}</ul></div>`);
+  }
+  function euPage() {
+    const d = S.insc || {};
+    const it = [['#plano', 'clock', 'Meu plano de estudo', `${d.min || metaMin()} min por dia · ${(RITMOS.find(r => r[0] === d.ritmo) || [, '1 nível por semana'])[1]}`], ['#marco-zero', 'scale', 'Teste rápido', S.marco0 ? 'Feito. Veja a comparação na página inicial.' : 'De onde você parte (2 min)'], ['#constituicao', 'list', 'Minha Constituição Financeira', 'As regras que você escreveu ao longo do curso.'], ['#contribuir', 'gift', 'Contribuir (Pix)', 'Ajude a manter as bolsas.'], ['#completo', 'flag', 'Versão completa', 'Níveis 5 a 7.']];
+    if (S.admin) it.push(['#admin', 'key', 'Painel do administrador', 'Modo administrador ativo.']);
+    return shell(`<div class="col home2"><h1 class="hi">${esc(d.nome || 'Eu')}</h1><ul class="menu-list">${it.map(([h, ic, t, x]) => `<li><a href="${h}"><span class="mi">${ico(ic, 22)}</span><span><b>${t}</b><small>${esc(x)}</small></span><span class="pa">›</span></a></li>`).join('')}</ul>
+      <p class="disclaimer">Seu progresso fica salvo neste aparelho e neste navegador.</p></div>`);
   }
   function countSrc() { return Object.values(SRC).reduce((a, g) => a + Object.keys(g.items).length, 0); }
   function marcoCompare() {
     const rows = COURSE.marco.map(m => { const a = (S.marco0 || {})[m.k] || 0, f = (S.marcoF || {})[m.k]; return `<div class="b"><span>${esc(m.l.split(':')[0])}</span><span class="bb"><i class="a" style="width:${a * 10}%"></i>${f != null ? `<i class="f" style="width:${f * 10}%"></i>` : ''}</span></div>`; }).join('');
-    return `<div class="section-h"><h2>Sua transformação</h2><span class="small"><i style="display:inline-block;width:10px;height:10px;background:var(--muted);border-radius:2px"></i> Marco Zero ${S.marcoF ? ' · <i style="display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px"></i> Final' : ''}</span></div><div class="cmp">${rows}</div>`;
+    return `<div class="section-h"><h2>Sua transformação</h2><span class="small"><i style="display:inline-block;width:10px;height:10px;background:var(--muted);border-radius:2px"></i> Teste inicial ${S.marcoF ? ' · <i style="display:inline-block;width:10px;height:10px;background:var(--accent);border-radius:2px"></i> Final' : ''}</span></div><div class="cmp">${rows}</div>`;
   }
 
   /* ---------- Marco Zero / Final ---------- */
   function marco(final) {
     const key = final ? 'marcoF' : 'marco0'; const cur = S[key] || {};
     const items = COURSE.marco.map(m => `<div class="item"><label class="f" for="mz-${m.k}">${esc(m.l)}</label><input type="range" min="0" max="10" step="1" id="mz-${m.k}" value="${cur[m.k] != null ? cur[m.k] : 5}"><div class="small">Nota: <b class="mono" id="mzv-${m.k}">${cur[m.k] != null ? cur[m.k] : 5}</b>/10</div></div>`).join('');
-    return shell(`<div class="col" style="padding-top:36px"><span class="eyebrow">${final ? 'Marco final' : 'Marco Zero'}</span><h1 style="font-size:2.6rem">${final ? 'Quem você é agora' : 'De onde você parte'}</h1>
+    return shell(`<div class="col" style="padding-top:36px"><span class="eyebrow">${final ? 'Teste final · 2 minutos' : 'Teste rápido · 2 minutos'}</span><h1 style="font-size:2.6rem">${final ? 'Quem você é agora' : 'De onde você parte'}</h1>
       <p>${final ? 'Responda sem olhar o Marco Zero. A comparação aparece na página inicial e na sua Constituição.' : 'Seis notas de 0 a 10, com sinceridade. Você vai responder de novo no final do curso, e a diferença será a medida da sua transformação.'}</p>
       ${items}<div class="cta-row"><button class="btn primary" type="button" id="mz-save">Salvar e ${final ? 'ver minha Constituição' : 'ir para o Nível 1'}</button></div></div>`);
   }
@@ -3148,7 +3288,7 @@ COURSE.marco = [
   function tDraw() {
     if (!tUi) return; const x = sd(), m = metaMin(), done = fmtMin(x.s), frac = Math.min(1, x.s / (m * 60));
     $('.tmr-arc', tUi).setAttribute('stroke-dashoffset', String(94.25 * (1 - frac)));
-    $('.tmr-txt', tUi).textContent = (x.ok ? '✓ ' : '') + done + '/' + m;
+    $('.tmr-txt', tUi).textContent = (x.ok ? '✓ ' : 'Hoje ') + done + '/' + m + ' min';
     const b = $('.tmr-big', tUi); b.textContent = x.ok ? `Meta de hoje cumprida: ${done} min${done > m ? ' (+' + (done - m) + ' extras)' : ''}` : `${done} min de ${m} hoje`;
     b.setAttribute('aria-valuemax', String(m)); b.setAttribute('aria-valuenow', String(Math.min(done, m))); b.setAttribute('aria-valuetext', `${done} de ${m} minutos`);
     $('[data-t=go]', tUi).textContent = tRun ? 'Pausar relógio' : (x.s > 0 ? 'Continuar' : `Estudar ${m} min`);
@@ -3229,7 +3369,7 @@ COURSE.marco = [
     const cur = steps[st.at], nDone = steps.filter(s => stepDone(lv, st, s)).length;
     const map = steps.map((s, i) => `<li class="${i === st.at ? 'cur' : ''} ${stepDone(lv, st, s) ? 'ok' : ''}"><button type="button" data-step="${i}" aria-label="Parada ${i + 1}: ${esc(s.t)}${stepDone(lv, st, s) ? ' (feita)' : ''}">${stepDone(lv, st, s) ? '✓' : i + 1}</button></li>`).join('');
     return shell(`<section class="trail ${lv.cor}"><div class="col">
-      <div class="trail-top"><span class="eyebrow">Nível ${lv.id} · ${esc(lv.titulo)}</span><span class="trail-count">${nDone} de ${steps.length} paradas feitas</span></div>
+      <div class="trail-top"><a class="back" href="#">‹ Início</a><span class="trail-count">Nível ${lv.id} de 7</span></div><h2 class="trail-t">${esc(lv.titulo)}</h2><p class="small">${nDone} de ${steps.length} paradas feitas · a bolinha com contorno é onde você está</p>
       <ol class="trail-map" aria-label="Paradas do nível">${map}</ol>
       <div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="${steps.length}" aria-valuenow="${nDone}" aria-valuetext="${nDone} de ${steps.length} paradas"><i style="width:${100 * nDone / steps.length}%"></i></div>
       <article class="stop" id="stop" tabindex="-1">
@@ -3237,7 +3377,7 @@ COURSE.marco = [
         <div class="stop-b" id="stop-b"></div>
       </article>
       <nav class="stop-nav" aria-label="Navegação entre paradas">${st.at > 0 ? '<button class="btn" type="button" data-nav="-1">← Parada anterior</button>' : '<span></span>'}<button class="btn primary" type="button" id="stop-next" data-nav="1">${st.at === steps.length - 1 ? 'Voltar ao início' : 'Próxima parada →'}</button></nav>
-      <p class="small trail-alt"><a href="#${lv.slug}" data-lista>Ver o nível inteiro numa página só</a> · Seu progresso fica salvo neste aparelho.</p>
+      ${L[lv.id] ? `<p class="small nextlv">Depois deste: Nível ${lv.id + 1} · ${esc(L[lv.id].titulo)} ${lockedPaid(lv.id + 1) ? '★ versão completa' : unlocked(lv.id + 1) ? '' : '🔒'}</p>` : ''}<p class="small trail-alt"><a href="#${lv.slug}" data-lista>Ver o nível inteiro numa página só</a> · Seu progresso fica salvo neste aparelho.</p>
     </div></section>`);
   }
 
@@ -3245,6 +3385,7 @@ COURSE.marco = [
     const steps = trailSteps(lv), st = trailState(lv), cur = steps[st.at], b = $('#stop-b');
     const go = i => { st.at = Math.max(0, Math.min(steps.length - 1, i)); save(); render(); const s = $('#stop'); if (s) { s.scrollIntoView({ block: 'start' }); s.focus({ preventScroll: true }); } };
     const finish = (msg) => {
+      S.act = S.act || {}; S.act[today()] = true;
       if (!st.ok[cur.k]) { st.ok[cur.k] = true; save(); if ((S.cel || 'full') !== 'off' && !matchMedia('(prefers-reduced-motion: reduce)').matches) confetti(26, 1300); }
       toast(msg || VIVA[Math.floor(Math.random() * VIVA.length)]);
       if (st.at < steps.length - 1) go(st.at + 1);
@@ -3266,23 +3407,32 @@ COURSE.marco = [
       b.innerHTML = anaSay('Primeiro, um vídeo curtinho. Aperte o play e assista com calma. Se quiser, mude a velocidade no botão “1×” ou esconda a legenda.') + `<div data-video="${cur.vid}"></div>`;
       mountVideo($('[data-video]', b), cur.vid); nextBtn.textContent = 'Já assisti → próxima parada';
     } else if (cur.tipo === 'aula') {
-      const a = cur.a, n = a.slides.length; let k = 0, answered = !!st.ok[cur.k];
+      const a = cur.a, n = a.slides.length, ai = +cur.k.slice(1) + 1; let k = 0, answered = !!st.ok[cur.k];
+      $('.stop-h').hidden = true;
+      b.innerHTML = `<div class="deck-head"><span class="eyebrow">Nível ${lv.id} · ${esc(lv.titulo)}</span><h1>Aula ${ai} de ${lv.aulas.length}: ${esc(a.t)}</h1><span class="small">Parada ${st.at + 1} de ${steps.length} · cerca de ${cur.min} min</span></div>
+        <div class="deck" id="deck" tabindex="0" role="region" aria-roledescription="apresentação" aria-label="Slides da aula ${ai}"><div class="deck-in" aria-live="polite"></div><div class="deck-foot"><span class="deck-n"></span><button class="deck-fs" type="button" aria-label="Tela cheia">⛶</button></div></div>
+        <div class="deck-ctrl"><button class="btn" type="button" data-sl="-1">← Anterior</button><span class="dots"></span><button class="btn primary" type="button" data-sl="1">Próximo →</button></div>
+        <details class="more"><summary>Quero saber mais (texto completo, com as fontes)</summary><div class="lesson">${cites(a.body)}</div></details>`;
+      const deck = $('#deck', b), inn = $('.deck-in', b), prevB = $('[data-sl="-1"]', b), nextS = $('[data-sl="1"]', b);
       const draw = () => {
         if (k < n) { const s = a.slides[k];
-          b.innerHTML = `<div class="slide"><div class="slide-ico">${ico(s.ico, 54)}</div><h2>${esc(s.t)}</h2><p>${esc(s.x)}</p></div>
-            <div class="slide-nav"><button class="btn" type="button" data-sl="-1" ${k ? '' : 'disabled'}>← Voltar</button><span class="dots" aria-label="Cartão ${k + 1} de ${n}">${a.slides.map((x, i) => `<i class="${i === k ? 'on' : ''}"></i>`).join('')}<i class="q ${k >= n ? 'on' : ''}">?</i></span><button class="btn primary" type="button" data-sl="1">${k === n - 1 ? 'Responder a pergunta →' : 'Próximo →'}</button></div>`;
-          $$('[data-sl]', b).forEach(x => x.onclick = () => { k += +x.dataset.sl; draw(); });
+          inn.innerHTML = `<div class="slide"><div class="slide-ico">${ico(s.ico, 54)}</div><h2>${esc(s.t)}</h2><p>${esc(s.x)}</p></div>`;
         } else { const c = a.check;
-          b.innerHTML = anaSay('Pergunta rapidinha para ver se ficou claro. Não vale nota!') + `<fieldset class="chk"><legend>${esc(c.q)}</legend>${c.o.map((o, i) => `<label><input type="radio" name="chk" value="${i}"><span>${esc(o)}</span></label>`).join('')}</fieldset><div class="chk-res" aria-live="polite"></div>
-            <div class="slide-nav"><button class="btn" type="button" data-back>← Rever os cartões</button></div>
-            <details class="more"><summary>Quero saber mais (texto completo, com as fontes)</summary><div class="lesson">${cites(a.body)}</div></details>`;
-          $('[data-back]', b).onclick = () => { k = 0; draw(); };
-          $$('input[name=chk]', b).forEach(r => r.onchange = () => { const ok = +r.value === c.a; $$('label', b).forEach(l => l.classList.remove('right', 'wrong')); r.closest('label').classList.add(ok ? 'right' : 'wrong');
-            $('.chk-res', b).innerHTML = ok ? `<p class="ok"><b>Acertou!</b> ${esc(c.e)}</p>` : `<p class="bad"><b>Quase!</b> Tente outra opção. Se quiser, volte aos cartões.</p>`; if (ok) { answered = true; nextBtn.disabled = false; nextBtn.focus(); } });
+          inn.innerHTML = `<div class="slide qz"><span class="eyebrow">Pergunta rápida · não vale nota</span><fieldset class="chk"><legend>${esc(c.q)}</legend>${c.o.map((o, i) => `<label><input type="radio" name="chk" value="${i}"><span>${esc(o)}</span></label>`).join('')}</fieldset><div class="chk-res" aria-live="polite"></div></div>`;
+          $$('input[name=chk]', inn).forEach(r => r.onchange = () => { const ok = +r.value === c.a; $$('label', inn).forEach(l => l.classList.remove('right', 'wrong')); r.closest('label').classList.add(ok ? 'right' : 'wrong');
+            $('.chk-res', inn).innerHTML = ok ? `<p class="ok"><b>Acertou!</b> ${esc(c.e)}</p>` : `<p class="bad"><b>Quase!</b> Tente outra opção, ou volte aos slides.</p>`; if (ok) { answered = true; nextBtn.disabled = false; nextBtn.hidden = false; } });
         }
+        $('.deck-n', b).textContent = k < n ? `${k + 1} / ${n}` : 'Pergunta';
+        $('.dots', b).innerHTML = a.slides.map((x, i) => `<i class="${i === k ? 'on' : ''}"></i>`).join('') + `<i class="q ${k >= n ? 'on' : ''}">?</i>`;
+        prevB.disabled = k === 0; nextS.hidden = k >= n; nextS.textContent = k === n - 1 ? 'Ir para a pergunta →' : 'Próximo →';
         nextBtn.disabled = !answered; nextBtn.hidden = !answered && k < n;
       };
-      draw(); nextBtn.textContent = 'Concluir parada ✓';
+      const mv = d => { k = Math.max(0, Math.min(n, k + d)); draw(); };
+      prevB.onclick = () => mv(-1); nextS.onclick = () => mv(1);
+      deck.onkeydown = ev => { if (ev.key === 'ArrowRight') mv(1); if (ev.key === 'ArrowLeft') mv(-1); };
+      let x0 = null; deck.addEventListener('touchstart', ev => { x0 = ev.touches[0].clientX; }, { passive: true }); deck.addEventListener('touchend', ev => { if (x0 == null) return; const dx = ev.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50 && !ev.target.closest('label')) mv(dx < 0 ? 1 : -1); x0 = null; });
+      $('.deck-fs', b).onclick = () => { try { document.fullscreenElement ? document.exitFullscreen() : deck.requestFullscreen(); } catch (e) { } };
+      draw(); nextBtn.textContent = 'Concluir aula ✓';
       nextBtn.onclick = () => { if (answered) finish(); };
     } else if (cur.tipo === 'ex') {
       const e = cur.e, G = e.guia, d = exData(e.id);
@@ -3324,6 +3474,38 @@ COURSE.marco = [
     setTimeout(() => o.classList.add('fade'), 2200); setTimeout(() => o.remove(), 2800);
   }
 
+
+  /* ---------- Ajustar meu plano ---------- */
+  function planoPage() {
+    if (!S.insc) return shell(`<div class="col" style="padding-top:36px"><div class="lockmsg"><h2>Você ainda não tem um plano</h2><p>Faça a inscrição gratuita para montar o seu.</p><a class="btn primary" href="#inscricao">Fazer inscrição</a></div></div>`);
+    const d = S.insc, dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'], M = [5, 10, 15, 20, 30], m = metaMin();
+    return shell(`<div class="col" style="padding-top:32px"><span class="eyebrow">Seu plano de estudo</span><h1 style="font-size:2.3rem">Ajustar meu plano</h1>
+      <p>A vida muda, e o plano pode mudar junto. Escolha o que cabe na sua rotina agora. O seu progresso no curso continua salvo.</p>
+      <form id="plano" class="ex" novalidate>
+        <fieldset class="fs"><legend class="f">Quantos minutos por dia?</legend>
+          <div class="chips">${M.map(v => `<label><input type="radio" name="pl-min" value="${v}" ${m === v ? 'checked' : ''}><span>${v} min</span></label>`).join('')}<label><input type="radio" name="pl-min" value="x" ${M.includes(m) ? '' : 'checked'}><span>Outro</span></label><input type="number" id="pl-minx" min="3" max="60" value="${M.includes(m) ? '' : m}" aria-label="Outro valor em minutos" style="width:90px"></div></fieldset>
+        <fieldset class="fs"><legend class="f">Em que dias?</legend>
+          <div class="chips">${dias.map((n, i) => `<label><input type="checkbox" name="pl-dia" value="${i}" ${d.dias && d.dias[i] ? 'checked' : ''}><span>${n}</span></label>`).join('')}</div>
+          <label class="f" for="pl-hora">Horário</label><input type="time" id="pl-hora" value="${esc(d.hora || '')}" style="max-width:160px"></fieldset>
+        <fieldset class="fs"><legend class="f">Em que ritmo?</legend>
+          <div class="chips">${RITMOS.map(([k, t]) => `<label><input type="radio" name="pl-rit" value="${k}" ${(d.ritmo || '1') === k ? 'checked' : ''}><span>${t}</span></label>`).join('')}</div></fieldset>
+        <div class="callout" id="pl-txt" aria-live="polite"></div>
+        <p class="formerr" id="pl-err" role="alert" hidden></p>
+        <div class="cta-row"><button class="btn primary" type="submit">Salvar meu plano</button><a class="btn" href="#">Cancelar</a></div>
+      </form></div>`);
+  }
+  function bindPlano() {
+    const f = $('#plano'); if (!f) return; const nomes = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+    const get = () => { const mr = $('input[name=pl-min]:checked', f); const dias = {}; $$('input[name=pl-dia]', f).forEach(c => { if (c.checked) dias[c.value] = true; });
+      return { min: mr ? (mr.value === 'x' ? ($('#pl-minx').value ? Math.max(3, Math.min(60, +$('#pl-minx').value)) : '') : +mr.value) : '', dias, hora: $('#pl-hora').value, ritmo: ($('input[name=pl-rit]:checked', f) || {}).value || '' }; };
+    const upd = () => { const d = get(), ds = Object.keys(d.dias).map(Number).sort();
+      $('#pl-txt').innerHTML = !d.min || !ds.length || !d.hora || !d.ritmo ? 'Escolha minutos, dias, horário e ritmo.' : `<b>Novo compromisso:</b> estudar ${d.min} minutos por dia, ${ds.length === 7 ? 'todos os dias' : 'nestes dias: ' + ds.map(i => nomes[i]).join(', ').replace(/, ([^,]*)$/, ' e $1')}, às ${esc(d.hora)}, ${ritmoFrase(d.ritmo)}.`; };
+    f.addEventListener('input', upd); f.addEventListener('change', upd); upd();
+    f.onsubmit = ev => { ev.preventDefault(); const d = get(), err = $('#pl-err');
+      const miss = !d.min ? 'Escolha quantos minutos por dia.' : !Object.keys(d.dias).length ? 'Escolha pelo menos um dia.' : !d.hora ? 'Escolha o horário.' : !d.ritmo ? 'Escolha o ritmo.' : '';
+      if (miss) { err.hidden = false; err.textContent = miss; return; }
+      Object.assign(S.insc, d, { ajustado: today() }); S.meta = d.min; save(); toast('Plano atualizado!'); location.hash = ''; };
+  }
   /* ---------- Router ---------- */
   function render() {
     closePop(); $$('[data-video]').forEach(el => el._stop && el._stop()); try { speechSynthesis.cancel(); } catch (e) { }
@@ -3333,6 +3515,10 @@ COURSE.marco = [
     else if (lv) { html = level(lv); bind = () => bindLevel(lv); }
     else if (h === 'inscricao') { const ver = !S.insc || S._verForm; html = ver ? inscricao() : home(); bind = ver ? bindInsc : () => { }; S._verForm = false; }
     else if (h === 'admin') { html = adminPage(); bind = bindAdmin; }
+    else if (h === 'plano') { html = planoPage(); bind = bindPlano; }
+    else if (h === 'trilha') { html = trilhaPage(); }
+    else if (h === 'ferramentas') { html = ferramentasPage(); }
+    else if (h === 'eu') { html = euPage(); }
     else if (h === 'completo') { html = completo(null); bind = bindCompleto; }
     else if (h === 'contribuir') { html = contribuir(); bind = bindContribuir; }
     else if (h === 'marco-zero') { html = marco(false); bind = () => bindMarco(false); }
@@ -3345,7 +3531,7 @@ COURSE.marco = [
     app.innerHTML = html; setSync(syncState);
     $$('[data-act="ritual"]').forEach(a => a.onclick = ev => { ev.preventDefault(); ritual(); });
     $$('[data-locked]').forEach(a => a.onclick = ev => ev.preventDefault());
-    bind(); requestAnimationFrame(paintGuils); timerMount();
+    bind(); bindSheets(); requestAnimationFrame(paintGuils); timerMount();
     const titles = { 'revisao': 'Revisão', 'biblioteca': 'Fontes', 'final': 'Prova final', 'constituicao': 'Constituição' };
     if (render._last !== h) { window.scrollTo(0, 0); render._last = h; }
   }
